@@ -32,7 +32,7 @@ const LoginContainer = (props) => {
         <React.Fragment>
             <CssBaseline />
             <Container maxWidth="sm" className={classes.loginContainer}>
-                { props.login ? <LoginForm /> : <SignupForm /> }
+                { props.login ? <LoginForm handleLogin={props.handleLogin} /> : <SignupForm handleLogin={props.handleLogin}/> }
             </Container>
         </React.Fragment>
     );

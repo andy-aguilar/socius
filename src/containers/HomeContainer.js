@@ -25,14 +25,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function HomeContainer(params) {
+export default function HomeContainer(props) {
+
+    const handleLogin = () => {
+        props.history.push("/dashboard")
+    }
+
     const classes = useStyles()
 
     return (
         <React.Fragment>
             <CssBaseline/>
                 <Container className= {classes.homeContainer}>
-                <LoginContainer />
+                <LoginContainer handleLogin={handleLogin}/>
                 
             </Container>
         </React.Fragment>
