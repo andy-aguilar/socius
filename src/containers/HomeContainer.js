@@ -1,10 +1,8 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import runners from '../images/runners.jpg'
 import LoginContainer from './LoginContainer'
-import LoginForm from '../components/LoginForm'
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "center",
         alignItems: 'center',
+        maxWidth: '100%',
     }
 }));
 
@@ -32,7 +31,7 @@ export default function HomeContainer(params) {
     return (
         <React.Fragment>
             <CssBaseline/>
-                <Container maxWidth="100%" className= {classes.homeContainer}>
+                <Container className= {classes.homeContainer}>
                 <LoginContainer />
                 
             </Container>

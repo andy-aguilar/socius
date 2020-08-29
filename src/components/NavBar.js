@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -36,13 +35,9 @@ const useStyles = makeStyles((theme) => ({
 
 function MenuAppBar(props) {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -58,13 +53,10 @@ function MenuAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
-          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton> */}
           <Typography variant="h4" className={classes.title}>
             Socius
           </Typography>
-          {auth ? (
+          {localStorage.currentUser ? (
             <div>
               <IconButton
                 aria-label="account of current user"
@@ -92,6 +84,7 @@ function MenuAppBar(props) {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>Logout</MenuItem>
               </Menu>
             </div>
           )
@@ -107,6 +100,7 @@ function MenuAppBar(props) {
 const mapStateToProps = state => {
   return{
     login: state.login,
+    user: state.user,
   }
 }
 
