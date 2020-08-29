@@ -9,7 +9,7 @@ import LandingContainer from './containers/DashboardContainer'
 
 function App() {
   return (
-    <div className="App" style={{ height: '100%', backgroundColor: 'grey' }}>
+    <div className="App" style={{ height: '100%'}}>
       <Router>
         <Route path='/' render={ routerProps => <NavBar {...routerProps}/>} />
         <Route exact path='/' render={ routerProps => <HomeContainer {...routerProps}/>} />
