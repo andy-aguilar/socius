@@ -5,14 +5,20 @@ import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        //flexGrow: 1,
+        flexGrow: 1,
+        height: '90%',
     },
     paper: {
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
-        height: '100%',
+        height: '98%',
     },
+    gridContainer: {
+        margin: "0",
+        width: "100%",
+        height: '100%',
+    }
 }));
 
 const DashboardContainer = (props) => {
@@ -22,7 +28,7 @@ const DashboardContainer = (props) => {
         <Grid container
             direction="row" 
             spacing={2}
-            alignItems="stretch"
+            className={classes.gridContainer}
         >
             <Grid item xs={3}>
                 <Paper className={classes.paper}>xs=3</Paper>
