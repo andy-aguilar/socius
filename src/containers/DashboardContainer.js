@@ -46,7 +46,7 @@ const DashboardContainer = (props) => {
 
     const renderRuns = () => {
         //props.runs.runs.map(run => <li>{run.name}</li>)
-        return (props.runs.loading ? <CircularProgress /> : props.runs.runs.map(run => <DashboardRun run={run}/>))
+        return (props.runs.loading ? <CircularProgress /> : props.runs.runs.map(run => <DashboardRun key={run.id} run={run}/>))
         
     }
 

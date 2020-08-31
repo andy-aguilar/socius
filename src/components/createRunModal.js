@@ -91,8 +91,9 @@ function CreateRunModal(props) {
         e.preventDefault()
         const run={
             run: {name,
-            time,
-            distance}
+            date: time,
+            distance, 
+            user_id: parseInt(localStorage.currentUser, 10)}
         }
         props.createRun(run)
         e.target.reset()

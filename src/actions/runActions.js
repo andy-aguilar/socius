@@ -23,6 +23,7 @@ export const createRun = (run) => {
         let config = {
             method: 'POST',
             headers: {
+                "Content-Type": "application/json",
                 "Authorization": `bearer ${localStorage.token}`
             },
             body: JSON.stringify(run)
@@ -30,7 +31,7 @@ export const createRun = (run) => {
         fetch(RUNURL, config).then(response => {
             return response.json()
         }).then(responseJSON => {
-            dispatch({ type: 'CREATE_RUN', runs: responseJSON})
+            dispatch({ type: 'CREATE_RUN', run: responseJSON})
         })
     }
 }
