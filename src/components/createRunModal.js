@@ -1,8 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withTheme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { connect } from 'react-redux';
 import {hideCreateRunModal} from '../actions/modalActions';
+import TextField from '@material-ui/core/TextField';
 
 
 
@@ -35,14 +36,33 @@ const useStyles = makeStyles((theme) => ({
         marginBlockStart: 0,
     },
     form:{
-
-    }
+        margin: theme.spacing(1),
+        width: '25ch',
+        height: 'cover',
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    textField: {
+        backgroundColor: "white",
+        color: 'white',
+        width: 250,
+        marginBottom: 10,
+    },
+    timeField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 250,
+        backgroundColor: 'white',
+        marginBottom: 10,
+    },
 }));
 
 function CreateRunModal(props) {
     const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
+    const [name, setName] = React.useState("")
+    const [time, setTime] = React.useState("2017-05-24T10:30")
 
     const handleClose = () => {
         props.hideCreateRunModal()
@@ -57,8 +77,39 @@ function CreateRunModal(props) {
         >
             <div style={modalStyle} className={classes.paper}>
                 <h1 id="simple-modal-title" className={classes.heading}>Create Run</h1>
-                <form>
-                    
+                <form noValidate>
+                    <TextField id="filled-search"
+                        label="Run Name"
+                        type="search"
+                        variant="filled"
+                        className={classes.textField}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    <TextField
+                        id="datetime-local"
+                        label="Date/Time"
+                        type="datetime-local"
+                        variant='filled'
+                        value={time}
+                        
+                        className={classes.timeField}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        onChange={(e) => setTime(e.target.value)}
+                    />
+                    <TextField
+                        id="filled-number"
+                        label="Miles"
+                        type="number"
+                        className={classes.textField}
+                        inputProps={{ min: 0, max: 1000}}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        variant="filled"
+                    />
                 </form>
             </div>
         </Modal>
