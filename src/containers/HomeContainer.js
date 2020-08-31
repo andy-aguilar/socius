@@ -7,20 +7,19 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        '& .MuiTextField-root': {
-        margin: theme.spacing(1),
-        width: '25ch',
-        height: 'cover',
-        },
+
     },
     homeContainer: {
         backgroundImage: `url(${runners})`,
         backgroundSize: "cover",
-        height: "95%",
+        height: "100%",
         display: "flex",
         justifyContent: "center",
         alignItems: 'center',
         maxWidth: '100%',
+    },
+    spacer:{
+        height: '64px',
     }
 }));
 
@@ -35,7 +34,9 @@ export default function HomeContainer(props) {
 
     return (
         <React.Fragment>
+            
             <CssBaseline/>
+            <div style={{height: '64px'}}></div>
                 <Container className= {classes.homeContainer}>
                 <LoginContainer handleLogin={handleLogin}/>
                 

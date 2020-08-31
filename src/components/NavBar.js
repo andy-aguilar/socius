@@ -8,9 +8,10 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
-import { connect } from 'react-redux';
-import {toggleLogin} from '../actions/loginActions'
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import { connect } from 'react-redux';
+import {showCreateRunModal} from '../actions/modalActions';
+import {toggleLogin} from '../actions/loginActions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,9 +62,14 @@ function MenuAppBar(props) {
     props.history.push("/")
   }
 
+  const createRunClick = () => {
+    handleClose()
+    props.showCreateRunModal()
+  }
+
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar elevation={3} position="fixed" style={{backgroundColor: "#f44336", borderBottom: "1px groove grey"}}>
         <Toolbar className={classes.toolbar}>
           <Typography variant="h4" className={classes.title}>
             Socius
@@ -122,7 +128,7 @@ function MenuAppBar(props) {
                 open={openAdd}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Add Run</MenuItem>
+                <MenuItem onClick={ createRunClick }>Add Run</MenuItem>
                 <MenuItem onClick={handleClose}>Add Club</MenuItem>
                 <MenuItem onClick={handleClose}>Add Friend</MenuItem>
               </Menu>
@@ -144,4 +150,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { toggleLogin })(MenuAppBar)
+export default connect(mapStateToProps, { toggleLogin, showCreateRunModal })(MenuAppBar)

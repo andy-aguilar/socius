@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {loginUser} from '../actions/loginActions';
 import {connect} from 'react-redux';
@@ -29,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         marginTop: '4em',
+        backgroundColor: "#f44336",
+        color: "white",
     }
 
 }));
@@ -72,7 +74,7 @@ const LoginForm = (props) => {
     return(
         <form className={classes.root} noValidate autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
             <div>
-            <h1 className={classes.login}> Log In</h1>
+                <h1 className={classes.login}> Log In</h1>
                 <TextField id="filled-search"
                     label="Your Email"
                     type="search"
@@ -90,7 +92,7 @@ const LoginForm = (props) => {
                     className={classes.textField}
                     onChange={(e) => setPassword(e.target.value)}
                 /><br/>
-                <Button type="submit" size="large" variant="contained" color="primary" className={classes.button}>
+                <Button type="submit" size="large" variant="contained" className={classes.button}>
                     LOGIN
                 </Button>
             </div>

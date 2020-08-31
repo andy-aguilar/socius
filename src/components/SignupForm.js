@@ -28,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         marginTop: '4em',
+        backgroundColor: "#f44336",
+        color: "white",
     }
 
 }));
@@ -90,7 +92,7 @@ const SignupForm = (props) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)} 
                 /><br/>
-                <Button type="submit" size="large" variant="contained" color="primary" className={classes.button}>
+                <Button type="submit" size="large" variant="contained" className={classes.button}>
                     Signup
                 </Button>
             </div>
