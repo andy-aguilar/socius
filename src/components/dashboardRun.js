@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -14,7 +13,6 @@ import { red } from '@material-ui/core/colors';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import mapimage from '../images/mapimage.jpeg'
 import ChatIcon from '@material-ui/icons/Chat';
-import { TextareaAutosize } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {

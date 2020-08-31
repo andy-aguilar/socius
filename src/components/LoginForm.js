@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles, withTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {loginUser} from '../actions/loginActions';
 import {connect} from 'react-redux';

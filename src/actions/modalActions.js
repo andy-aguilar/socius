@@ -9,3 +9,11 @@ export const hideCreateRunModal = () => {
         dispatch({type: 'HIDE_CREATE_RUN_MODAL'})
     }
 }
+
+export const hideCreateRunSnackBar = () => {
+    return (dispatch) => {
+        dispatch({type: 'HIDE_CREATE_RUN_SNACK_BAR'})
+    }
+}
+
+

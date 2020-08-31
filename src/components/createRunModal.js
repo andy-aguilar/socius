@@ -1,9 +1,13 @@
-import React from 'react';
-import { makeStyles, withTheme } from '@material-ui/core/styles';
+import React, { useState} from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { connect } from 'react-redux';
 import {hideCreateRunModal} from '../actions/modalActions';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import {createRun} from '../actions/runActions';
+import CloseIcon from '@material-ui/icons/Close';
+
 
 
 
@@ -55,18 +59,45 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'white',
         marginBottom: 10,
     },
+    button: {
+        marginTop: 45,
+        backgroundColor: "#f44336",
+        color: "white",
+    },
+    x: {
+        position: 'absolute',
+        top: '8px',
+        right: '8px',
+    }
 }));
 
 function CreateRunModal(props) {
     const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
-    const [modalStyle] = React.useState(getModalStyle);
-    const [name, setName] = React.useState("")
-    const [time, setTime] = React.useState("2017-05-24T10:30")
+    const [modalStyle] = useState(getModalStyle);
+    const [name, setName] = useState("")
+    const [time, setTime] = useState("2020-08-22T06:00")
+    const [distance, setDistance] = useState(0)
+
 
     const handleClose = () => {
         props.hideCreateRunModal()
+        setName("")
+        setTime("2020-08-22T06:00")
+        setDistance(0)
     };
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const run={
+            run: {name,
+            time,
+            distance}
+        }
+        props.createRun(run)
+        e.target.reset()
+        // props.hideCreateRunModal()
+    }
 
     return (
         <Modal
@@ -77,7 +108,8 @@ function CreateRunModal(props) {
         >
             <div style={modalStyle} className={classes.paper}>
                 <h1 id="simple-modal-title" className={classes.heading}>Create Run</h1>
-                <form noValidate>
+                <CloseIcon className={classes.x} onClick={props.hideCreateRunModal}/>
+                <form onSubmit={(e) => handleSubmit(e)} noValidate>
                     <TextField id="filled-search"
                         label="Run Name"
                         type="search"
@@ -109,7 +141,12 @@ function CreateRunModal(props) {
                             shrink: true,
                         }}
                         variant="filled"
-                    />
+                        value= {distance}
+                        onChange={(e) => { setDistance(parseInt(e.target.value, 10))}}
+                    /><br/>
+                    <Button type="submit" size="large" variant="contained" className={classes.button}>
+                    Create Run
+                    </Button>
                 </form>
             </div>
         </Modal>
@@ -122,4 +159,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { hideCreateRunModal })(CreateRunModal)
+export default connect(mapStateToProps, { hideCreateRunModal, createRun })(CreateRunModal)
