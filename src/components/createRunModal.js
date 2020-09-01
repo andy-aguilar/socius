@@ -115,15 +115,16 @@ function CreateRunModal(props) {
 
     useEffect(() => {
         if(props.open){
-            console.log(mapContainer)
             setTimeout(()=> {
-                console.log(mapContainer)
                 const map = new mapboxgl.Map({
                     container: mapContainer,
                     style: 'mapbox://styles/mapbox/streets-v11',
                     center: [longitude, latitude],
                     zoom: zoom
                 })
+                map.on('move', () => {
+                    setZoom(map.getZoom().toFixed(2))
+                    });
                 map.addControl(
                     new mapboxgl.GeolocateControl({
                     positionOptions: {
@@ -136,20 +137,27 @@ function CreateRunModal(props) {
                 map.on('click', (e) => {
                     console.log(e.lngLat)
                     const modal = document.getElementsByClassName("makeStyles-modalPaper-1")[0];
-                    const marker = modal.getElementsByClassName("mapboxgl-marker")
-                    if(marker.length === 0){
+                    const testMarker = modal.getElementsByClassName("mapboxgl-marker")
+                    if(testMarker.length === 0){
                         let coords = `lat: ${e.lngLat.lat} <br> lng: ${e.lngLat.lng}`;
                         let popup = new mapboxgl.Popup().setText(coords);
                         let el = document.createElement('div');
                         el.id = 'set-marker';
                         el.className = 'TEST'
-                        new mapboxgl.Marker({
+                        const marker = new mapboxgl.Marker({
                             draggable: true,
                             id: 'test-marker'
                         })
                             .setLngLat(e.lngLat)
                             .setPopup(popup)
                             .addTo(map);
+                        function onDragEnd() {
+                            var lngLat = marker.getLngLat();
+                            console.log(lngLat)
+                            setLatitude(lngLat.lat)
+                            setLongitude(lngLat.lng)
+                            }
+                        marker.on('dragend', onDragEnd);
                     }
                 
                 
@@ -158,9 +166,9 @@ function CreateRunModal(props) {
                     // // create the marker
 
                 });
-            }, 50)
+            }, 500)
         }
-    })
+    }, [props.open])
         
 
 
