@@ -60,6 +60,8 @@ function DashboardRun(props) {
         setExpanded(!expanded);
     };
 
+    let mapContainer
+
     useEffect(() => {
         const map = new mapboxgl.Map({
             container: mapContainer,
@@ -100,7 +102,7 @@ function DashboardRun(props) {
             />
             <CardMedia
                 className={classes.media}
-                image={mapimage}
+                ref={el => mapContainer = el}
                 title={`${creator['first_name']}'s Run`}
             />
             <CardContent>
