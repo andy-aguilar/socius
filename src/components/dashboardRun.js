@@ -11,7 +11,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import mapimage from '../images/mapimage.jpeg'
 import ChatIcon from '@material-ui/icons/Chat';
 import { connect } from 'react-redux';
 import { joinRun } from '../actions/runActions';
@@ -52,9 +51,9 @@ const useStyles = makeStyles((theme) => ({
 function DashboardRun(props) {
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
-    const [longitude, setLongitude] = useState(5);
-    const [latitude, setLatitude] = useState(34);
-    const [zoom, setZoom] = useState(2);
+    const [longitude, setLongitude] = useState(-77.0489);
+    const [latitude, setLatitude] = useState(38.8892);
+    const [zoom, setZoom] = useState(14.65);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -69,7 +68,17 @@ function DashboardRun(props) {
             center: [longitude, latitude],
             zoom: zoom
         })
+        map.on('move', () => {
+            setLongitude(map.getCenter().lng.toFixed(4))
+            setLatitude(map.getCenter().lat.toFixed(4))
+            setZoom(map.getZoom().toFixed(2))
+            });
+        const marker= new mapboxgl.Marker()
+        .setLngLat([-77.0489, 38.8892])
+        .addTo(map);
     }, [])
+
+    
 
     const joinRun = () => {
         const userRun = {

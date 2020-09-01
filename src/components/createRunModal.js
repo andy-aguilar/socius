@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { connect } from 'react-redux';
@@ -7,9 +7,10 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import {createRun} from '../actions/runActions';
 import CloseIcon from '@material-ui/icons/Close';
+import mapboxgl from 'mapbox-gl';
+import Container from '@material-ui/core/Container';
 
-
-
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWFndWlsYXIzMTgiLCJhIjoiY2tlazNrOTlkMDMwcjJzb3Yyd20zYm9naSJ9.Ik_aGfxRFIrtj1Azc9jGXw';
 
 function getModalStyle() {
 
@@ -21,16 +22,17 @@ function getModalStyle() {
 }
 
 const useStyles = makeStyles((theme) => ({
-    paper: {
+    modalPaper: {
     position: 'absolute',
-    width: 400,
-    height: 450,
+    width: 500,
+    height: 700,
     backgroundColor: 'rgba(0,0,0,.80)',
     boxShadow: theme.shadows[5],
     //padding: theme.spacing(2, 4, 3),
     outline: 'none',
     color: 'white',
     textAlign: 'center',
+    alignItems: 'center'
     },
     heading: {
         backgroundColor: 'black',
@@ -60,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 10,
     },
     button: {
-        marginTop: 45,
+        marginTop: 20,
         backgroundColor: "#f44336",
         color: "white",
     },
@@ -68,6 +70,13 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         top: '8px',
         right: '8px',
+    },
+    mapContainer:{
+        position: 'relative',
+        width: 480,
+        height: 300,
+        marginTop: 20,
+        marginLeft: 10,
     }
 }));
 
@@ -78,7 +87,11 @@ function CreateRunModal(props) {
     const [name, setName] = useState("")
     const [time, setTime] = useState("2020-08-22T06:00")
     const [distance, setDistance] = useState(0)
+    const [longitude, setLongitude] = useState(-77.0489);
+    const [latitude, setLatitude] = useState(38.8892);
+    const [zoom, setZoom] = useState(14.65);
 
+    let mapContainer
 
     const handleClose = () => {
         props.hideCreateRunModal()
@@ -100,6 +113,60 @@ function CreateRunModal(props) {
         props.hideCreateRunModal()
     }
 
+    useEffect(() => {
+        if(props.open){
+            console.log(mapContainer)
+            setTimeout(()=> {
+                console.log(mapContainer)
+                const map = new mapboxgl.Map({
+                    container: mapContainer,
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: [longitude, latitude],
+                    zoom: zoom
+                })
+                map.addControl(
+                    new mapboxgl.GeolocateControl({
+                    positionOptions: {
+                    enableHighAccuracy: true
+                    },
+                    trackUserLocation: true
+                    })
+                    );
+                
+                map.on('click', (e) => {
+                    console.log(e.lngLat)
+                    const modal = document.getElementsByClassName("makeStyles-modalPaper-1")[0];
+                    const marker = modal.getElementsByClassName("mapboxgl-marker")
+                    if(marker.length === 0){
+                        let coords = `lat: ${e.lngLat.lat} <br> lng: ${e.lngLat.lng}`;
+                        let popup = new mapboxgl.Popup().setText(coords);
+                        let el = document.createElement('div');
+                        el.id = 'set-marker';
+                        el.className = 'TEST'
+                        new mapboxgl.Marker({
+                            draggable: true,
+                            id: 'test-marker'
+                        })
+                            .setLngLat(e.lngLat)
+                            .setPopup(popup)
+                            .addTo(map);
+                    }
+                
+                
+                    // // create DOM element for the marker
+                
+                    // // create the marker
+
+                });
+            }, 50)
+        }
+    })
+        
+
+
+    
+
+
     return (
         <Modal
             open={props.open}
@@ -107,7 +174,7 @@ function CreateRunModal(props) {
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
         >
-            <div style={modalStyle} className={classes.paper}>
+            <div style={modalStyle} className={classes.modalPaper}>
                 <h1 id="simple-modal-title" className={classes.heading}>Create Run</h1>
                 <CloseIcon className={classes.x} onClick={props.hideCreateRunModal}/>
                 <form onSubmit={(e) => handleSubmit(e)} noValidate>
@@ -145,6 +212,10 @@ function CreateRunModal(props) {
                         value= {distance}
                         onChange={(e) => { setDistance(parseInt(e.target.value, 10))}}
                     /><br/>
+                    <div 
+                        className={classes.mapContainer}
+                        ref={el => mapContainer = el}
+                    ></div>
                     <Button type="submit" size="large" variant="contained" className={classes.button}>
                     Create Run
                     </Button>
