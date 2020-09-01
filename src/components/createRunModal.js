@@ -135,10 +135,11 @@ function CreateRunModal(props) {
                     );
                 
                 map.on('click', (e) => {
-                    console.log(e.lngLat)
                     const modal = document.getElementsByClassName("makeStyles-modalPaper-1")[0];
+                    const circle = modal.getElementsByClassName('mapboxgl-user-location-accuracy-circle')
                     const testMarker = modal.getElementsByClassName("mapboxgl-marker")
-                    if(testMarker.length === 0){
+                    console.log(circle, testMarker)
+                    if(testMarker.length === 0 || (circle.length !== 0 && testMarker.length === circle.length + 1)){
                         let coords = `lat: ${e.lngLat.lat} <br> lng: ${e.lngLat.lng}`;
                         let popup = new mapboxgl.Popup().setText(coords);
                         let el = document.createElement('div');
@@ -153,7 +154,6 @@ function CreateRunModal(props) {
                             .addTo(map);
                         function onDragEnd() {
                             var lngLat = marker.getLngLat();
-                            console.log(lngLat)
                             setLatitude(lngLat.lat)
                             setLongitude(lngLat.lng)
                             }
@@ -166,7 +166,7 @@ function CreateRunModal(props) {
                     // // create the marker
 
                 });
-            }, 500)
+            }, 50)
         }
     }, [props.open])
         
