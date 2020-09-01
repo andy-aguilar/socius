@@ -97,7 +97,7 @@ function CreateRunModal(props) {
         }
         props.createRun(run)
         e.target.reset()
-        // props.hideCreateRunModal()
+        props.hideCreateRunModal()
     }
 
     return (

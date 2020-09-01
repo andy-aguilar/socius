@@ -40,9 +40,11 @@ const useStyles = makeStyles((theme) => ({
 const DashboardContainer = (props) => {
     const classes = useStyles();
 
+    const { fetchRuns } = props
+
     useEffect(() => {
-        props.fetchRuns()
-    }, [])
+        fetchRuns()
+    }, [fetchRuns])
 
     const renderRuns = () => {
         //props.runs.runs.map(run => <li>{run.name}</li>)

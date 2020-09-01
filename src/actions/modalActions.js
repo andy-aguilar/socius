@@ -16,4 +16,18 @@ export const hideCreateRunSnackBar = () => {
     }
 }
 
+export const hideUpdateSuccess = () => {
+    return (dispatch) => {
+        dispatch({type: 'HIDE_UPDATE_SUCCESS'})
+    }
+}
+
+export const hideUpdateError = () => {
+    return (dispatch) => {
+        dispatch({type: 'HIDE_UPDATE_ERROR'})
+    }
+}
+
+
+
 

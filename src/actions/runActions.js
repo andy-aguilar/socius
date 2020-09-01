@@ -1,4 +1,4 @@
-const RUNURL = 'http://localhost:3000/runs'
+const RUNURL = 'http://localhost:3000/'
 
 export const fetchRuns = () => {
     return (dispatch) => {
@@ -9,7 +9,7 @@ export const fetchRuns = () => {
                 "Authorization": `bearer ${localStorage.token}`
             }
         }
-        fetch(RUNURL, config).then(response => {
+        fetch(`${RUNURL}runs`, config).then(response => {
             return response.json()
         }).then(responseJSON => {
             dispatch({ type: 'ADD_RUNS', runs: responseJSON})
@@ -28,10 +28,29 @@ export const createRun = (run) => {
             },
             body: JSON.stringify(run)
         }
-        fetch(RUNURL, config).then(response => {
+        fetch(`${RUNURL}runs`, config).then(response => {
             return response.json()
         }).then(responseJSON => {
             dispatch({ type: 'CREATE_RUN', run: responseJSON})
+        })
+    }
+}
+
+export const joinRun = (userRun) => {
+    return (dispatch) => {
+        dispatch({type: 'JOINING_RUN'})
+        let config = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `bearer ${localStorage.token}`
+            },
+            body: JSON.stringify(userRun)
+        }
+        fetch(`${RUNURL}user_runs`, config).then(response => {
+            return response.json()
+        }).then(responseJSON => {
+            dispatch({ type: 'UPDATE_RUN', run: responseJSON})
         })
     }
 }

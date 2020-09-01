@@ -13,6 +13,8 @@ import { red } from '@material-ui/core/colors';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import mapimage from '../images/mapimage.jpeg'
 import ChatIcon from '@material-ui/icons/Chat';
+import { connect } from 'react-redux';
+import { joinRun } from '../actions/runActions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,13 +46,24 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function DashboardRun(props) {
+function DashboardRun(props) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+
+    const joinRun = () => {
+        const userRun = {
+            user_run: {
+                user_id: parseInt(localStorage.currentUser, 10),
+                run_id: props.run.id
+            }
+        }
+
+        props.joinRun(userRun)
+    }
 
     return (
         <Card className={classes.root}>
@@ -61,7 +74,7 @@ export default function DashboardRun(props) {
                     </Avatar>
             }
             action={
-                <IconButton aria-label="joinRun">
+                <IconButton aria-label="joinRun" onClick={joinRun}>
                     <AddCircleOutlineIcon color="primary" />
                 </IconButton>
             }
@@ -107,3 +120,6 @@ export default function DashboardRun(props) {
         </Card>
     )
 }
+
+
+export default connect(null, { joinRun })(DashboardRun)

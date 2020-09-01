@@ -8,7 +8,7 @@ import CreateRunModal from './components/createRunModal';
 import {connect} from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import {hideCreateRunSnackBar} from './actions/modalActions'
+import {hideCreateRunSnackBar, hideUpdateError, hideUpdateSuccess} from './actions/modalActions'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -19,6 +19,8 @@ function App(props) {
 
   const handleClose = (event, reason) => {
     props.hideCreateRunSnackBar()
+    props.hideUpdateError()
+    props.hideUpdateSuccess()
   }
 
   return (
@@ -27,6 +29,22 @@ function App(props) {
       <Snackbar open={props.createSuccess} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           Run Created
+        </Alert>
+      </Snackbar>
+      <Snackbar open={props.updateSuccess} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          { props.creator ? 
+            `You joined ${props.creator}'s run!` :
+            "You joined the run!"
+          }
+        </Alert>
+      </Snackbar>
+      <Snackbar open={props.updateError} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          { props.errorMessage ? 
+            props.errorMessage :
+            "You are already running that run!"
+          }
         </Alert>
       </Snackbar>
       <Router>
@@ -40,8 +58,12 @@ function App(props) {
 
 const mapStateToProps = state => {
   return {
-    createSuccess: state.modals.createSnackBar
+    createSuccess: state.modals.createSnackBar,
+    updateSuccess: state.modals.updateSuccess,
+    updateError: state.modals.updateError,
+    creator: state.runs.runCreator,
+    errorMessage: state.runs.errorMessage
   }
 }
 
-export default connect(mapStateToProps, {hideCreateRunSnackBar})(App);
+export default connect(mapStateToProps, {hideCreateRunSnackBar, hideUpdateError, hideUpdateSuccess})(App);

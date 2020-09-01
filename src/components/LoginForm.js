@@ -65,6 +65,7 @@ const LoginForm = (props) => {
                 props.loginUser(data.user)
                 localStorage.token = data.jwt
                 localStorage.currentUser = data.user.id
+                props.handleLogin()
             }
         })
         setEmail("")

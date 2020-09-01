@@ -1,4 +1,4 @@
-function runReducer(state = {runs: [], loading: false, creating: false}, action){
+function runReducer(state = { runs: [], loading: false, creating: false, updating: false, runCreator: "", errorMessage: "" }, action){
     switch(action.type){
         case 'LOADING_RUNS':
             return {
@@ -22,6 +22,27 @@ function runReducer(state = {runs: [], loading: false, creating: false}, action)
             return{...state,
                 runs: [...state.runs, action.run],
                 creating: false
+            }
+        case "JOINING_RUN":
+            return {...state,
+                updating: true
+            }
+        case "UPDATE_RUN":
+            if (action.run.error){
+                return {...state, 
+                    updating: false, 
+                    errorMessage: action.run.error
+                }
+            }
+            else{
+                const runIndex = state.runs.findIndex(run => run.id === action.run.id)
+                const newRuns = [...state.runs]
+                newRuns[runIndex] = action.run
+                return {...state,
+                    runs: newRuns,
+                    updating: false,
+                    runCreator: action.run.users[0].first_name
+                }
             }
         default:
             return state;
