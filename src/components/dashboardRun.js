@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -15,6 +15,9 @@ import mapimage from '../images/mapimage.jpeg'
 import ChatIcon from '@material-ui/icons/Chat';
 import { connect } from 'react-redux';
 import { joinRun } from '../actions/runActions';
+import mapboxgl from 'mapbox-gl';
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWFndWlsYXIzMTgiLCJhIjoiY2tlazNrOTlkMDMwcjJzb3Yyd20zYm9naSJ9.Ik_aGfxRFIrtj1Azc9jGXw';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,11 +51,23 @@ const useStyles = makeStyles((theme) => ({
 
 function DashboardRun(props) {
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = useState(false);
+    const [longitude, setLongitude] = useState(5);
+    const [latitude, setLatitude] = useState(34);
+    const [zoom, setZoom] = useState(2);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+
+    useEffect(() => {
+        const map = new mapboxgl.Map({
+            container: mapContainer,
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [longitude, latitude],
+            zoom: zoom
+        })
+    }, [])
 
     const joinRun = () => {
         const userRun = {
@@ -65,12 +80,14 @@ function DashboardRun(props) {
         props.joinRun(userRun)
     }
 
+    const {creator, run} = props
+
     return (
         <Card className={classes.root}>
             <CardHeader
                 avatar={
                     <Avatar aria-label="recipe" className={classes.avatar}>
-                        {props.run.users[0]['first_name'][0]}
+                        {creator['first_name'][0]}
                     </Avatar>
             }
             action={
@@ -78,17 +95,17 @@ function DashboardRun(props) {
                     <AddCircleOutlineIcon color="primary" />
                 </IconButton>
             }
-            title={props.run.name}
+            title={run.name}
             subheader="September 14, 2020"
             />
             <CardMedia
                 className={classes.media}
                 image={mapimage}
-                title={`${props.run.users[0]['first_name']}'s Run`}
+                title={`${creator['first_name']}'s Run`}
             />
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    {`Miles: ${props.run.distance}`}<br/>
+                    {`Miles: ${run.distance}`}<br/>
                     Pace: 8'00"<br/>
                     Time: 6:00 a.m.
                 </Typography>

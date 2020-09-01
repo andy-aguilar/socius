@@ -41,7 +41,7 @@ function runReducer(state = { runs: [], loading: false, creating: false, updatin
                 return {...state,
                     runs: newRuns,
                     updating: false,
-                    runCreator: action.run.users[0].first_name
+                    runCreator: action.run.users.find(user => user.id === action.run.user_owner_id).first_name
                 }
             }
         default:

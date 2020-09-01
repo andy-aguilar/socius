@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
-        height: '50%',
+        width: '22%',
         position: 'fixed',
         alignItems: 'center',
     },
@@ -48,7 +48,7 @@ const DashboardContainer = (props) => {
 
     const renderRuns = () => {
         //props.runs.runs.map(run => <li>{run.name}</li>)
-        return (props.runs.loading ? <CircularProgress /> : props.runs.runs.map(run => <DashboardRun key={run.id} run={run}/>))
+        return (props.runs.loading ? <CircularProgress /> : props.runs.runs.map(run => <DashboardRun key={run.id} run={run} creator={run.users.find(user => user.id === run.user_owner_id)}/>))
         
     }
 

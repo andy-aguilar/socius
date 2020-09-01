@@ -51,6 +51,7 @@ function App(props) {
         <Route path='/' render={ routerProps => <NavBar {...routerProps}/>} />
         <Route exact path='/' render={ routerProps => <HomeContainer {...routerProps}/>} />
         <Route exact path='/dashboard' render={ routerProps => <DashboardContainer {...routerProps}/>} />
+        <Route dynamic path = '/listings/?'/>
       </Router>
     </div>
   );
