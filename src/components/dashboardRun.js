@@ -45,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
     },
     chat: {
         textAlign: 'left',
+    },
+    joins:{
+        paddingLeft: 5,
     }
 }));
 
@@ -129,7 +132,7 @@ function DashboardRun(props) {
                     <Avatar aria-label="recipe" className={classes.avatarFriend}>
                         K
                     </Avatar>
-                <Typography variant="body2" color="textSecondary" component="p">
+                <Typography className={classes.joins} variant="body2" color="textSecondary" component="p">
                     { "Kristin is joining this run" }
                 </Typography>
                 <IconButton

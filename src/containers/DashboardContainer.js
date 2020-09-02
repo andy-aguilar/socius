@@ -72,7 +72,7 @@ const DashboardContainer = (props) => {
                 </Paper>
             </Grid>
             <Grid item xs={6}>
-                <Paper elevation={3} className={classes.paper}>{renderRuns()}</Paper>
+                <Paper elevation={0} className={classes.paper}>{renderRuns()}</Paper>
             </Grid>
             <Grid item xs={3}>
                 <Paper elevation={0} className={classes.paperSide}>
