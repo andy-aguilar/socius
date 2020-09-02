@@ -24,7 +24,7 @@ function App(props) {
   }
 
   return (
-    <div className="App" style={{ height: '100%', display: flex, flexFlow: column}}>
+    <div className="App" style={{ height: '100%', display: 'flex', flexFlow: 'column'}}>
       <CreateRunModal/>
       <Snackbar open={props.createSuccess} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
@@ -43,7 +43,7 @@ function App(props) {
         <Alert onClose={handleClose} severity="error">
           { props.errorMessage ? 
             props.errorMessage :
-            "You are already running that run!"
+            "You've already joined that run!"
           }
         </Alert>
       </Snackbar>

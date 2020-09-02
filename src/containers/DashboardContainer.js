@@ -6,6 +6,7 @@ import {fetchRuns} from '../actions/runActions';
 import {connect} from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import DashboardRun from '../components/dashboardRun'
+import UserCard from '../components/userCard'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
         width: '22%',
         position: 'fixed',
         alignItems: 'center',
+        display: 'flex',
+        flexFlow: 'column',
     },
     gridContainer: {
         margin: "0",
@@ -62,7 +65,9 @@ const DashboardContainer = (props) => {
             className={classes.gridContainer}
         >
             <Grid item xs={3}>
-                <Paper elevation={3} className={classes.paperSide}>xs=3</Paper>
+                <Paper elevation={3} className={classes.paperSide}>
+                    <UserCard />
+                </Paper>
             </Grid>
             <Grid item xs={6}>
                 <Paper elevation={3} className={classes.paper}>{renderRuns()}</Paper>
