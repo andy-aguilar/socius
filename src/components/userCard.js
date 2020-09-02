@@ -46,6 +46,7 @@ const useStyles = makeStyles({
     accordionContainer:{
         display: 'flex',
         flexFlow: 'column',
+        padding: '0px'
     }
 });
 
@@ -92,7 +93,7 @@ const UserCard = (props) => {
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                             >
-                                <Typography className={classes.heading}>Accordion 1</Typography>
+                                <Typography className={classes.heading}>Weekly Stats</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
                                 <Typography>
@@ -107,7 +108,7 @@ const UserCard = (props) => {
                                 aria-controls="panel2a-content"
                                 id="panel2a-header"
                             >
-                            <Typography className={classes.heading}>Accordion 2</Typography>
+                            <Typography className={classes.heading}>Upcoming Runs</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
                             <Typography>

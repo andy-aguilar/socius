@@ -7,6 +7,8 @@ import {connect} from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import DashboardRun from '../components/dashboardRun'
 import UserCard from '../components/userCard'
+import FriendsContainer from '../containers/friendsContainer'
+import ClubsContainer from '../containers/clubsContainer'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -65,7 +67,7 @@ const DashboardContainer = (props) => {
             className={classes.gridContainer}
         >
             <Grid item xs={3}>
-                <Paper elevation={3} className={classes.paperSide}>
+                <Paper elevation={0} className={classes.paperSide}>
                     <UserCard />
                 </Paper>
             </Grid>
@@ -73,7 +75,10 @@ const DashboardContainer = (props) => {
                 <Paper elevation={3} className={classes.paper}>{renderRuns()}</Paper>
             </Grid>
             <Grid item xs={3}>
-                <Paper elevation={3} className={classes.paperSide}>xs=3</Paper>
+                <Paper elevation={0} className={classes.paperSide}>
+                    <FriendsContainer/>
+                    <ClubsContainer />
+                </Paper>
             </Grid>
         </Grid>
     </div>
