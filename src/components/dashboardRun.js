@@ -55,6 +55,8 @@ function DashboardRun(props) {
     const [latitude, setLatitude] = useState(38.8892);
     const [zoom, setZoom] = useState(14.65);
 
+    const {creator, run} = props
+
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
@@ -65,8 +67,8 @@ function DashboardRun(props) {
         const map = new mapboxgl.Map({
             container: mapContainer,
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [longitude, latitude],
-            zoom: zoom
+            center: [run.longitude, run.latitude],
+            zoom: run.zoom
         })
         map.on('move', () => {
             setLongitude(map.getCenter().lng.toFixed(4))
@@ -74,8 +76,10 @@ function DashboardRun(props) {
             setZoom(map.getZoom().toFixed(2))
             });
         const marker= new mapboxgl.Marker()
-        .setLngLat([-77.0489, 38.8892])
+        .setLngLat([run.longitude, run.latitude])
         .addTo(map);
+        map.scrollZoom.disable();
+        map.addControl(new mapboxgl.NavigationControl());
     }, [])
 
     
@@ -91,7 +95,7 @@ function DashboardRun(props) {
         props.joinRun(userRun)
     }
 
-    const {creator, run} = props
+    
 
     return (
         <Card className={classes.root}>

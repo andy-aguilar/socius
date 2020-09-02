@@ -24,7 +24,7 @@ function App(props) {
   }
 
   return (
-    <div className="App" style={{ height: '100%'}}>
+    <div className="App" style={{ height: '100%', display: flex, flexFlow: column}}>
       <CreateRunModal/>
       <Snackbar open={props.createSuccess} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">

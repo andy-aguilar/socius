@@ -103,10 +103,16 @@ function CreateRunModal(props) {
     const handleSubmit = (e) => {
         e.preventDefault()
         const run={
-            run: {name,
-            date: time,
-            distance, 
-            user_id: parseInt(localStorage.currentUser, 10)}
+            run: {
+                name,
+                date: time,
+                distance, 
+                user_owner_id: parseInt(localStorage.currentUser, 10),
+                latitude,
+                longitude,
+                zoom,
+            },
+
         }
         props.createRun(run)
         e.target.reset()
@@ -140,6 +146,8 @@ function CreateRunModal(props) {
                     const testMarker = modal.getElementsByClassName("mapboxgl-marker")
                     console.log(circle, testMarker)
                     if(testMarker.length === 0 || (circle.length !== 0 && testMarker.length === circle.length + 1)){
+                        setLatitude(e.lngLat.lat)
+                        setLongitude(e.lngLat.lng)
                         let coords = `lat: ${e.lngLat.lat} <br> lng: ${e.lngLat.lng}`;
                         let popup = new mapboxgl.Popup().setText(coords);
                         let el = document.createElement('div');

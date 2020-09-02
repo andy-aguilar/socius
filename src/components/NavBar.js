@@ -69,7 +69,7 @@ function MenuAppBar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar elevation={3} position="fixed" style={{backgroundColor: "#f44336", borderBottom: "1px groove grey"}}>
+      <AppBar elevation={3} position="fixed" style={{backgroundColor: "#f44336"}}>
         <Toolbar className={classes.toolbar}>
           <Typography variant="h4" className={classes.title}>
             Socius

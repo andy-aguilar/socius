@@ -12,15 +12,11 @@ const useStyles = makeStyles((theme) => ({
     homeContainer: {
         backgroundImage: `url(${runners})`,
         backgroundSize: "cover",
-        height: "100%",
         display: "flex",
         justifyContent: "center",
         alignItems: 'center',
         maxWidth: '100%',
     },
-    spacer:{
-        height: '64px',
-    }
 }));
 
 
