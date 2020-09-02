@@ -56,67 +56,67 @@ const FriendsContainer = () => {
             <div className={classes.friends}>
             <Paper className={classes.friend} elevation={0} >
                 <Avatar className={classes.avatar}>T</Avatar>
-                <Typography variant="p" component="p" className={classes.friendText} gutterBottom>
+                <Typography component="p" className={classes.friendText} gutterBottom>
                     This
                 </Typography>
             </Paper>
             <Paper className={classes.friend} elevation={0} >
                 <Avatar className={classes.avatar}>I</Avatar>
-                <Typography variant="p" component="p" className={classes.friendText} gutterBottom>
+                <Typography component="p" className={classes.friendText} gutterBottom>
                     Is
                 </Typography>
             </Paper>
             <Paper className={classes.friend} elevation={0} >
                 <Avatar className={classes.avatar}>W</Avatar>
-                <Typography variant="p" component="p" className={classes.friendText} gutterBottom>
+                <Typography component="p" className={classes.friendText} gutterBottom>
                     Where
                 </Typography>
             </Paper>
             <Paper className={classes.friend} elevation={0} >
                 <Avatar className={classes.avatar}>Y</Avatar>
-                <Typography variant="p" component="p" className={classes.friendText} gutterBottom>
+                <Typography component="p" className={classes.friendText} gutterBottom>
                     Your
                 </Typography>
             </Paper>
             <Paper className={classes.friend} elevation={0} >
                 <Avatar className={classes.avatar}>F</Avatar>
-                <Typography variant="p" component="p" className={classes.friendText} gutterBottom>
+                <Typography component="p" className={classes.friendText} gutterBottom>
                     Friends
                 </Typography>
             </Paper>
             <Paper className={classes.friend} elevation={0} >
                 <Avatar className={classes.avatar}>W</Avatar>
-                <Typography variant="p" component="p" className={classes.friendText} gutterBottom>
+                <Typography component="p" className={classes.friendText} gutterBottom>
                     Would
                 </Typography>
             </Paper>
             <Paper className={classes.friend} elevation={0} >
                 <Avatar className={classes.avatar}>G</Avatar>
-                <Typography variant="p" component="p" className={classes.friendText} gutterBottom>
+                <Typography component="p" className={classes.friendText} gutterBottom>
                     Go
                 </Typography>
             </Paper>
             <Paper className={classes.friend} elevation={0} >
                 <Avatar className={classes.avatar}>I</Avatar>
-                <Typography variant="p" component="p" className={classes.friendText} gutterBottom>
+                <Typography component="p" className={classes.friendText} gutterBottom>
                     If
                 </Typography>
             </Paper>
             <Paper className={classes.friend} elevation={0} >
                 <Avatar className={classes.avatar}>Y</Avatar>
-                <Typography variant="p" component="p" className={classes.friendText} gutterBottom>
+                <Typography component="p" className={classes.friendText} gutterBottom>
                     You
                 </Typography>
             </Paper>
             <Paper className={classes.friend} elevation={0} >
                 <Avatar className={classes.avatar}>H</Avatar>
-                <Typography variant="p" component="p" className={classes.friendText} gutterBottom>
+                <Typography component="p" className={classes.friendText} gutterBottom>
                     Had
                 </Typography>
             </Paper>
             <Paper className={classes.friend} elevation={0} >
                 <Avatar className={classes.avatar}>A</Avatar>
-                <Typography variant="p" component="p" className={classes.friendText} gutterBottom>
+                <Typography component="p" className={classes.friendText} gutterBottom>
                     Any
                 </Typography>
             </Paper>

@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import {createRun} from '../actions/runActions';
 import CloseIcon from '@material-ui/icons/Close';
 import mapboxgl from 'mapbox-gl';
-import Container from '@material-ui/core/Container';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWFndWlsYXIzMTgiLCJhIjoiY2tlazNrOTlkMDMwcjJzb3Yyd20zYm9naSJ9.Ik_aGfxRFIrtj1Azc9jGXw';
 
@@ -94,6 +93,7 @@ function CreateRunModal(props) {
     let mapContainer
 
     const handleClose = () => {
+        console.log('closing')
         props.hideCreateRunModal()
         setName("")
         setTime("2020-08-22T06:00")
@@ -192,7 +192,7 @@ function CreateRunModal(props) {
         >
             <div style={modalStyle} className={classes.modalPaper}>
                 <h1 id="simple-modal-title" className={classes.heading}>Create Run</h1>
-                <CloseIcon className={classes.x} onClick={props.hideCreateRunModal}/>
+                <CloseIcon className={classes.x} onClick={handleClose}/>
                 <form onSubmit={(e) => handleSubmit(e)} noValidate>
                     <TextField id="filled-search"
                         label="Run Name"

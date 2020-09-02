@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
@@ -54,9 +53,6 @@ const useStyles = makeStyles((theme) => ({
 function DashboardRun(props) {
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
-    const [longitude, setLongitude] = useState(-77.0489);
-    const [latitude, setLatitude] = useState(38.8892);
-    const [zoom, setZoom] = useState(14.65);
 
     const {creator, run} = props
 
@@ -73,12 +69,7 @@ function DashboardRun(props) {
             center: [run.longitude, run.latitude],
             zoom: run.zoom
         })
-        map.on('move', () => {
-            setLongitude(map.getCenter().lng.toFixed(4))
-            setLatitude(map.getCenter().lat.toFixed(4))
-            setZoom(map.getZoom().toFixed(2))
-            });
-        const marker= new mapboxgl.Marker()
+        new mapboxgl.Marker()
         .setLngLat([run.longitude, run.latitude])
         .addTo(map);
         map.scrollZoom.disable();
@@ -116,7 +107,7 @@ function DashboardRun(props) {
             title={run.name}
             subheader="September 14, 2020"
             />
-            <CardMedia
+            <div
                 className={classes.media}
                 ref={el => mapContainer = el}
                 title={`${creator['first_name']}'s Run`}

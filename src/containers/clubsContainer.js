@@ -55,61 +55,61 @@ const ClubsContainer = () => {
             <div className={classes.clubs}>
             <Paper className={classes.club} elevation={0} >
                 <Avatar className={classes.avatar}>Y</Avatar>
-                <Typography variant="p" component="p" className={classes.clubText} gutterBottom>
+                <Typography component="p" className={classes.clubText} gutterBottom>
                     You
                 </Typography>
             </Paper>
             <Paper className={classes.club} elevation={0} >
                 <Avatar className={classes.avatar}>C</Avatar>
-                <Typography variant="p" component="p" className={classes.clubText} gutterBottom>
+                <Typography component="p" className={classes.clubText} gutterBottom>
                     Could
                 </Typography>
             </Paper>
             <Paper className={classes.club} elevation={0} >
                 <Avatar className={classes.avatar}>A</Avatar>
-                <Typography variant="p" component="p" className={classes.clubText} gutterBottom>
+                <Typography component="p" className={classes.clubText} gutterBottom>
                     Also
                 </Typography>
             </Paper>
             <Paper className={classes.club} elevation={0} >
                 <Avatar className={classes.avatar}>J</Avatar>
-                <Typography variant="p" component="p" className={classes.clubText} gutterBottom>
+                <Typography component="p" className={classes.clubText} gutterBottom>
                     Join
                 </Typography>
             </Paper>
             <Paper className={classes.club} elevation={0} >
                 <Avatar className={classes.avatar}>C</Avatar>
-                <Typography variant="p" component="p" className={classes.clubText} gutterBottom>
+                <Typography component="p" className={classes.clubText} gutterBottom>
                     Clubs
                 </Typography>
             </Paper>
             <Paper className={classes.club} elevation={0} >
                 <Avatar className={classes.avatar}>I</Avatar>
-                <Typography variant="p" component="p" className={classes.clubText} gutterBottom>
+                <Typography component="p" className={classes.clubText} gutterBottom>
                     If
                 </Typography>
             </Paper>
             <Paper className={classes.club} elevation={0} >
                 <Avatar className={classes.avatar}>Y</Avatar>
-                <Typography variant="p" component="p" className={classes.clubText} gutterBottom>
+                <Typography component="p" className={classes.clubText} gutterBottom>
                     You
                 </Typography>
             </Paper>
             <Paper className={classes.club} elevation={0} >
                 <Avatar className={classes.avatar}>W</Avatar>
-                <Typography variant="p" component="p" className={classes.clubText} gutterBottom>
+                <Typography component="p" className={classes.clubText} gutterBottom>
                     Weren't
                 </Typography>
             </Paper>
             <Paper className={classes.club} elevation={0} >
                 <Avatar className={classes.avatar}>S</Avatar>
-                <Typography variant="p" component="p" className={classes.clubText} gutterBottom>
+                <Typography component="p" className={classes.clubText} gutterBottom>
                     So
                 </Typography>
             </Paper>
             <Paper className={classes.club} elevation={0} >
                 <Avatar className={classes.avatar}>L</Avatar>
-                <Typography variant="p" component="p" className={classes.clubText} gutterBottom>
+                <Typography component="p" className={classes.clubText} gutterBottom>
                     Lazy
                 </Typography>
             </Paper>
