@@ -41,6 +41,16 @@ const useStyles = makeStyles((theme) => ({
         width: theme.spacing(3),
         height: theme.spacing(3),
         fontSize: "12px",
+        marginLeft: -5,
+        border: "2px white solid"
+    },
+    avatarNoFriend:{
+        backgroundColor: '#bdbdbd',
+        width: theme.spacing(3),
+        height: theme.spacing(3),
+        fontSize: "12px",
+        marginLeft: -5,
+        border: "2px white solid"
     },
     chat: {
         textAlign: 'left',
@@ -89,7 +99,60 @@ function DashboardRun(props) {
         props.joinRun(userRun)
     }
 
-    
+    const renderFriends = () => {
+        let friends = run.users.filter(user => user.id !== run.user_owner_id)
+        if (friends.length === 0){
+            return <Avatar aria-label="recipe" className={classes.avatarNoFriend} >
+            ...
+        </Avatar>
+        }
+        else if(friends.length <= 3){
+            return friends.map(user => 
+                <Avatar key={user.id} aria-label="recipe" className={classes.avatarFriend} >
+                    {user.first_name[0]}
+                </Avatar>
+        )}
+        else{
+            return friends.slice(0, 3).map( user =>  
+                <Avatar key={user.id} aria-label="recipe" className={classes.avatarFriend} >
+                    {user.first_name[0]}
+                </Avatar>
+            )
+        }
+        
+    }
+
+    const renderFriendsText = () => {
+        let friends = run.users.filter(user => user.id !== run.user_owner_id)
+
+        if(friends.find(friend => friend.id === parseInt(localStorage.currentUser, 10))){
+            let text = ""
+            if (friends.length === 1){
+                text = ""
+            }
+            else if(friends.length === 2){
+                text = "and 1 other runner"
+            }
+            else{
+                text = `and ${friends.length - 1} other runners`
+            }
+            return <Typography className={classes.joins} variant="body2" color="textSecondary" component="p">
+                    { `You ${text} have joined this run` }
+                </Typography>
+        }
+        else{
+            if (friends.length === 0){
+                return <Typography className={classes.joins} variant="body2" color="textSecondary" component="p">
+                No one has joined this run. <a onClick={joinRun} style={{cursor: 'pointer', color: "#f44336"}}>Click here</a> to join!
+            </Typography>
+            }
+            else{
+                return <Typography className={classes.joins} variant="body2" color="textSecondary" component="p">
+                {`${friends.length} ${ friends.length === 1 ? "runner has" : "runners have"} joined this run.`}
+            </Typography>
+            }
+        }
+    }
 
     return (
         <Card className={classes.root}>
@@ -119,13 +182,10 @@ function DashboardRun(props) {
                     Time: 6:00 a.m.
                 </Typography>
             </CardContent>
-            <CardActions disableSpacing>
-                    <Avatar aria-label="recipe" className={classes.avatarFriend}>
-                        K
-                    </Avatar>
-                <Typography className={classes.joins} variant="body2" color="textSecondary" component="p">
-                    { "Kristin is joining this run" }
-                </Typography>
+            <CardActions disableSpacing style={{marginLeft: '5px'}}>
+                {renderFriends()}
+                {renderFriendsText()}
+                    
                 <IconButton
                     className={classes.expand}
                     onClick={handleExpandClick}

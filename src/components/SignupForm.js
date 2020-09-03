@@ -11,13 +11,14 @@ const useStyles = makeStyles((theme) => ({
     root: {
         '& .MuiTextField-root': {
         margin: theme.spacing(1),
-        width: '25ch',
+        width: '40ch',
         height: 'cover',
         },
     },
     textField: {
         backgroundColor: "white",
         color: 'white',
+        width: '40ch',
     },
     login: {
         width: "100%",
@@ -27,23 +28,38 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 0,
     },
     button: {
-        marginTop: '4em',
+        marginTop: '2em',
         backgroundColor: "#f44336",
         color: "white",
+    },
+    namesContainer: {
+        display: 'flex',
+        flexFlow: 'row',
+        marginLeft: '10px',
+        marginRight: '10px',
+    },
+    names: {
+        margin: 5,
+        backgroundColor: "white",
+        color: 'white',
     }
 
 }));
 
 const SignupForm = (props) => {
-    const[email, setEmail] = useState("")
-    const[password, setPassword] = useState("")
+    const[email, setEmail] = useState("");
+    const[password, setPassword] = useState("");
+    const[firstName, setFirstName] = useState("");
+    const[lastName, setLastName] = useState("");
     const classes = useStyles();
 
     const handleSubmit = (e) => {
         e.preventDefault()
         let userObj = {
             user: {email_address: email,
-            password
+            password,
+            first_name: firstName,
+            last_name: lastName,
             }
         }
         let userConfig = {
@@ -74,9 +90,29 @@ const SignupForm = (props) => {
         <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
             <div>
             <h1 className={classes.login}> Join Socius Today!</h1>
+                <div className={classes.namesContainer}>
+                    <TextField 
+                        id="filled-search"
+                        label="First Name"
+                        type="search"
+                        variant="filled"
+                        className={classes.names}
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                    />
+                    <TextField 
+                        id="filled-search"
+                        label="Last Name"
+                        type="search"
+                        variant="filled"
+                        className={classes.names}
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                    />
+                </div>
                 <TextField 
                     id="filled-search"
-                    label="Your Email"
+                    label="Email Address"
                     type="search"
                     variant="filled"
                     className={classes.textField}
