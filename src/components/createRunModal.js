@@ -86,9 +86,9 @@ function CreateRunModal(props) {
     const [name, setName] = useState("")
     const [time, setTime] = useState("2020-08-22T06:00")
     const [distance, setDistance] = useState(0)
-    const [longitude, setLongitude] = useState(-77.0489);
-    const [latitude, setLatitude] = useState(38.8892);
-    const [zoom, setZoom] = useState(14.65);
+    const [longitude, setLongitude] = useState(0);
+    const [latitude, setLatitude] = useState(0);
+    const [zoom, setZoom] = useState(0);
 
     let mapContainer
 

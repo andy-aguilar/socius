@@ -14,6 +14,9 @@ const useStyles = makeStyles({
     },
     title: {
         fontSize: '28px',
+        lineHeight: '50px',
+        backgroundColor: '#bdbdbd',
+        color: 'white',
     },
     pos: {
         marginBottom: 12,
@@ -48,7 +51,7 @@ const ClubsContainer = () => {
 
     return (
         <Card className={classes.root}>
-        <CardContent style={{padding: '10px', paddingRight: '0px', paddingLeft: '0px'}}>
+        <CardContent style={{padding: '0px', paddingRight: '0px', paddingLeft: '0px'}}>
             <Typography variant="h4" component="h2" className={classes.title} gutterBottom>
                 Clubs
             </Typography>
