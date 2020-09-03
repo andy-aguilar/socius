@@ -78,7 +78,7 @@ const SignupForm = (props) => {
             else {
                 props.loginUser(data.user)
                 localStorage.token = data.jwt
-                localStorage.currentUser = data.user
+                localStorage.currentUser = data.user.id
                 props.handleLogin()
             }
         })
