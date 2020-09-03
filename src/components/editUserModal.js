@@ -126,7 +126,7 @@ function EditUserModal(props) {
             <div style={modalStyle} className={classes.modalPaper}>
                 <h1 id="simple-modal-title" className={classes.heading}>Edit Profile</h1>
                 <CloseIcon style={{cursor: 'pointer'}} className={classes.x} onClick={handleClose}/>
-                <form noValidate>
+                <form onSubmit={(e) => handleSubmit(e)} noValidate>
                     <div className={classes.namesContainer}>
                         <TextField 
                             id="filled-search"
@@ -173,4 +173,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { hideEditUserModal })(EditUserModal)
+export default connect(mapStateToProps, { hideEditUserModal, updateUser })(EditUserModal)

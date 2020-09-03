@@ -8,7 +8,7 @@ import CreateRunModal from './components/createRunModal';
 import {connect} from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import {hideCreateRunSnackBar, hideUpdateError, hideUpdateSuccess} from './actions/modalActions'
+import {hideCreateRunSnackBar, hideUpdateError, hideUpdateSuccess, hideEditUserError, hideEditUserSuccess} from './actions/modalActions'
 import EditUserModal from './components/editUserModal';
 
 function Alert(props) {
@@ -19,9 +19,11 @@ function Alert(props) {
 function App(props) {
 
   const handleClose = (event, reason) => {
-    props.hideCreateRunSnackBar()
-    props.hideUpdateError()
-    props.hideUpdateSuccess()
+    props.hideCreateRunSnackBar();
+    props.hideUpdateError();
+    props.hideUpdateSuccess();
+    props.hideEditUserError();
+    props.hideEditUserSuccess();
   }
 
   return (
@@ -49,6 +51,19 @@ function App(props) {
           }
         </Alert>
       </Snackbar>
+      <Snackbar open={props.editUserError} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          { props.errorMessage ? 
+            props.errorMessage :
+            "Failed to update"
+          }
+        </Alert>
+      </Snackbar>
+      <Snackbar open={props.editUserSuccess} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Profile Updated!
+        </Alert>
+      </Snackbar>
       <Router>
         <Route path='/' render={ routerProps => <NavBar {...routerProps}/>} />
         <Route exact path='/' render={ routerProps => <HomeContainer {...routerProps}/>} />
@@ -65,8 +80,10 @@ const mapStateToProps = state => {
     updateSuccess: state.modals.updateSuccess,
     updateError: state.modals.updateError,
     creator: state.runs.runCreator,
-    errorMessage: state.runs.errorMessage
+    errorMessage: state.runs.errorMessage,
+    editUserSuccess: state.modals.editUserSuccess,
+    editUserError: state.modals.editUserError,
   }
 }
 
-export default connect(mapStateToProps, {hideCreateRunSnackBar, hideUpdateError, hideUpdateSuccess})(App);
+export default connect(mapStateToProps, {hideCreateRunSnackBar, hideUpdateError, hideUpdateSuccess, hideEditUserError, hideEditUserSuccess})(App);

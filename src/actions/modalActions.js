@@ -40,6 +40,18 @@ export const hideEditUserModal = () => {
     }
 }
 
+export const hideEditUserError = () => {
+    return (dispatch) => {
+        dispatch({ type: 'HIDE_EDIT_USER_ERROR'})
+    }
+}
+
+export const hideEditUserSuccess = () => {
+    return (dispatch) => {
+        dispatch({ type: 'HIDE_EDIT_USER_SUCCESS'})
+    }
+}
+
 
 
 

@@ -12,6 +12,7 @@ import AddBoxIcon from '@material-ui/icons/AddBox';
 import { connect } from 'react-redux';
 import {showCreateRunModal, showEditUserModal} from '../actions/modalActions';
 import {toggleLogin} from '../actions/loginActions';
+import logoGrey from '../images/logoGrey.png'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -76,6 +77,7 @@ function MenuAppBar(props) {
     <div className={classes.root}>
       <AppBar elevation={3} position="fixed" style={{backgroundColor: "#f44336"}}>
         <Toolbar className={classes.toolbar}>
+          <img src={logoGrey} style={{height: '64px'}} />
           <Typography variant="h4" className={classes.title}>
             Socius
           </Typography>

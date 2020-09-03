@@ -1,4 +1,4 @@
-function modalReducer(state = {createRun: false, createSnackBar: false, updateSuccess: false, updateError: false, editUser: false, }, action){
+function modalReducer(state = {createRun: false, createSnackBar: false, updateSuccess: false, updateError: false, editUser: false, editUserSuccess: false, editUserError: false,}, action){
     switch(action.type){
         case "SHOW_CREATE_RUN_MODAL":
             return {...state, createRun: true}
@@ -15,6 +15,17 @@ function modalReducer(state = {createRun: false, createSnackBar: false, updateSu
             else{
                 return {...state, updateSuccess: true}
             }
+        case 'UPDATE_USER':
+            if (action.user.error){
+                return {...state, editUserError: true}
+            }
+            else{
+                return{...state, editUserSuccess: true}
+            }
+        case 'HIDE_EDIT_USER_ERROR':
+            return {...state, editUserError: false}
+        case 'HIDE_EDIT_USER_SUCCESS':
+            return {...state, editUserSuccess: false}
         case 'HIDE_UPDATE_ERROR':
             return {...state, updateError: false}
         case 'HIDE_UPDATE_SUCCESS':
