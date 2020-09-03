@@ -10,8 +10,9 @@ import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import { connect } from 'react-redux';
-import {showCreateRunModal} from '../actions/modalActions';
+import {showCreateRunModal, showEditUserModal} from '../actions/modalActions';
 import {toggleLogin} from '../actions/loginActions';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,6 +55,11 @@ function MenuAppBar(props) {
     setAnchorEl(null);
     setAddAnchor(null);
   };
+
+  const handleEdit = () => {
+    handleClose()
+    props.showEditUserModal()
+  }
 
   const handleLogout = () => {
     handleClose()
@@ -109,7 +115,7 @@ function MenuAppBar(props) {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleEdit}>Edit Profile</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
               <Menu
@@ -149,4 +155,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { toggleLogin, showCreateRunModal })(MenuAppBar)
+export default connect(mapStateToProps, { toggleLogin, showCreateRunModal, showEditUserModal })(MenuAppBar)

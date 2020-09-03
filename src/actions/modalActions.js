@@ -28,6 +28,18 @@ export const hideUpdateError = () => {
     }
 }
 
+export const showEditUserModal = () => {
+    return (dispatch) => {
+        dispatch({ type: 'SHOW_EDIT_USER_MODAL'})
+    }
+}
+
+export const hideEditUserModal = () => {
+    return (dispatch) => {
+        dispatch({ type: 'HIDE_EDIT_USER_MODAL'})
+    }
+}
+
 
 
 

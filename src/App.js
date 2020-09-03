@@ -9,6 +9,7 @@ import {connect} from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import {hideCreateRunSnackBar, hideUpdateError, hideUpdateSuccess} from './actions/modalActions'
+import EditUserModal from './components/editUserModal';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -25,6 +26,7 @@ function App(props) {
 
   return (
     <div className="App" style={{ height: '100%', display: 'flex', flexFlow: 'column'}}>
+      <EditUserModal/>
       <CreateRunModal/>
       <Snackbar open={props.createSuccess} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">

@@ -16,3 +16,21 @@ export const fetchUser = (userId) => {
         })
     }
 }
+
+export const updateUser = (editedUser) => {
+    return (dispatch) => {
+        dispatch({ type: 'LOADING_USER'})
+        let config = {
+            method: 'PATCH',
+            headers: {
+                "Authorization": `bearer ${localStorage.token}`
+            },
+            body: JSON.stringify(editedUser)
+        }
+        fetch(`${USERURL}${editedUser.id}`, config).then(response => {
+            return response.json()
+        }).then(responseJSON => {
+            dispatch({ type: 'ADD_USER', user: responseJSON})
+        })
+    }
+}

@@ -192,7 +192,7 @@ function CreateRunModal(props) {
         >
             <div style={modalStyle} className={classes.modalPaper}>
                 <h1 id="simple-modal-title" className={classes.heading}>Create Run</h1>
-                <CloseIcon className={classes.x} onClick={handleClose}/>
+                <CloseIcon className={classes.x} style={{cursor: 'pointer'}} onClick={handleClose}/>
                 <form onSubmit={(e) => handleSubmit(e)} noValidate>
                     <TextField id="filled-search"
                         label="Run Name"
