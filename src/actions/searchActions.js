@@ -13,7 +13,13 @@ export const searchUsers = (query) => {
         fetch(`${SEARCHURL}${query}`, config).then(response => {
             return response.json()
         }).then(responseJSON => {
-            dispatch({ type: 'SEARCH_USERS', user: responseJSON})
+            dispatch({ type: 'SEARCH_USERS', users: responseJSON})
         })
+    }
+}
+
+export const clearSearch = () => {
+    return (dispatch) => {
+        dispatch({  type: "CLEAR_SEARCH" })
     }
 }

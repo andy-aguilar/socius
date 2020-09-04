@@ -9,7 +9,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import {connect} from 'react-redux';
-import {searchUsers} from '../actions/searchActions'
+import { searchUsers, clearSearch} from '../actions/searchActions';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import FriendCard from '../components/friendCard'
 
 
 const useStyles = makeStyles({
@@ -60,19 +62,30 @@ const useStyles = makeStyles({
         right: '20px',
     },
     searchContainer:{
-        backgroundColor: 'rgba(0,0,0,.87)',
-        minHeight: 274,
+        backgroundColor: 'white',
+        height: 270,
         minWidth: 320,
         position: 'absolute',
-        top: 65,
+        top: 67,
         zIndex: 1,
+        //overflow: 'scroll',
     },
     textField: {
-        backgroundColor: "#828282",
-        marginTop: 5,
+        backgroundColor: "white",
+        marginTop: 0,
         color: 'white',
         width: 310,
+        position: 'absolute',
+        zIndex: 2,
+        left: 0,
     },
+    spacer: {
+        height: "48px",
+    },
+    userContainer: {
+        height: 222,
+        overflow: 'scroll',
+    }
 });
 
 const FriendsContainer = (props) => {
@@ -93,7 +106,12 @@ const FriendsContainer = (props) => {
         if(query){
             props.searchUsers(query);
         }
+        else{props.clearSearch()}
     }, [query]);
+
+    const renderUsers = () =>{
+        return props.users.map(user => <FriendCard key={user.id} user={user}/>)
+    }
     
 
     return (
@@ -106,18 +124,27 @@ const FriendsContainer = (props) => {
                 <SearchIcon />
             </IconButton>
             { open ? 
-                <Paper className={classes.searchContainer}>
-                    <TextField id="filled-search"
+                <Paper elevation={0} className={classes.searchContainer}>
+                    <TextField id="standard-search"
                     label="Search Runners"
                     type="search"
-                    variant="filled"
                     className={classes.textField}
                     value={query}
                     onChange={(e) => handleSearch(e)}
+                    style={{backgroundColor: "#fff"}}
                 />
+                <div className={classes.spacer}></div>
+                <div className={classes.userContainer}>
+                    { props.searching ?
+                    <CircularProgress /> :
+                    renderUsers()
+                    }
+                </div>
                 </Paper> :
                 null
             }
+            
+            
             
             
             <div className={classes.friends} >
@@ -200,4 +227,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { searchUsers })(FriendsContainer)
+export default connect(mapStateToProps, { searchUsers, clearSearch })(FriendsContainer)
