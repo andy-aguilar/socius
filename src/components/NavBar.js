@@ -13,6 +13,9 @@ import { connect } from 'react-redux';
 import {showCreateRunModal, showEditUserModal} from '../actions/modalActions';
 import {toggleLogin} from '../actions/loginActions';
 import logoGrey from '../images/logoGrey.png'
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import Notifications from './notifications';
+import Badge from '@material-ui/core/Badge';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -41,7 +44,8 @@ function MenuAppBar(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [addAnchor, setAddAnchor] = React.useState(null);
   const open = Boolean(anchorEl);
-  const openAdd = Boolean(addAnchor)
+  const openAdd = Boolean(addAnchor);
+  const [notifications, setNotifications] = React.useState(false)
 
 
   const handleMenu = (event) => {
@@ -83,6 +87,26 @@ function MenuAppBar(props) {
           </Typography>
           {localStorage.currentUser ? (
             <div>
+              
+                <IconButton
+                  aria-label="notifications"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleClose}
+                  color="inherit"
+                >
+              <Badge
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                badgeContent={props.requests.length}
+                color="primary"
+              >
+                <NotificationsIcon onClick={() => setNotifications(!notifications)}/>
+                </Badge>
+              </IconButton>
+              
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -139,6 +163,10 @@ function MenuAppBar(props) {
                 <MenuItem onClick={handleClose}>Add Club</MenuItem>
                 <MenuItem onClick={handleClose}>Add Friend</MenuItem>
               </Menu>
+              {notifications ?
+                <Notifications /> : 
+                null
+              }
             </div>
           )
           :
@@ -154,7 +182,9 @@ const mapStateToProps = state => {
   return{
     login: state.login,
     user: state.user,
+    requests: state.friends.requests,
+    requestLoading: state.friends.requestLoading
   }
 }
 
-export default connect(mapStateToProps, { toggleLogin, showCreateRunModal, showEditUserModal })(MenuAppBar)
+export default connect(mapStateToProps, { toggleLogin, showCreateRunModal, showEditUserModal})(MenuAppBar)

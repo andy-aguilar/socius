@@ -1,4 +1,4 @@
-function modalReducer(state = {createRun: false, createSnackBar: false, updateSuccess: false, updateError: false, editUser: false, editUserSuccess: false, editUserError: false,}, action){
+function modalReducer(state = {createRun: false, createSnackBar: false, updateSuccess: false, updateError: false, editUser: false, editUserSuccess: false, editUserError: false, notifications: false}, action){
     switch(action.type){
         case "SHOW_CREATE_RUN_MODAL":
             return {...state, createRun: true}

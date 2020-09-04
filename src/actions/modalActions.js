@@ -52,6 +52,19 @@ export const hideEditUserSuccess = () => {
     }
 }
 
+export const showNotifications = () => {
+    return (dispatch) => {
+        dispatch({type: 'SHOW_NOTIFICATIONS'})
+    }
+}
+export const hideNotifications = () => {
+    return (dispatch) => {
+        dispatch({type: 'HIDE_NOTIFICATIONS'})
+    }
+}
+
+
+
 
 
 

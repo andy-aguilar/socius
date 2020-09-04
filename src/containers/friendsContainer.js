@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Avatar from '@material-ui/core/Avatar';
+
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
@@ -12,6 +12,7 @@ import {connect} from 'react-redux';
 import { searchUsers, clearSearch} from '../actions/searchActions';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import FriendCard from '../components/friendCard'
+import {addFriends, addRequests} from '../actions/friendActions'
 
 
 const useStyles = makeStyles({
@@ -108,10 +109,20 @@ const FriendsContainer = (props) => {
         else{props.clearSearch()}
     }, [query]);
 
+    useEffect(() => {
+        props.addFriends(localStorage.currentUser)
+        props.addRequests(localStorage.currentUser)
+        
+    }, [])
+
     const renderUsers = () =>{
-        return props.users.map(user => <FriendCard key={user.id} user={user}/>)
+        return props.users.map(user => <FriendCard key={user.id} user={user} friends={props.friends} addFriends={props.addFriends} />)
     }
-    
+
+    const renderFriends = () => {
+        return props.friends.map(user => <FriendCard key={user.id} user={user} friends={props.friends} addFriends={props.addFriends} />)
+    }
+
 
     return (
         <Card className={classes.root} elevation={0}>
@@ -147,7 +158,9 @@ const FriendsContainer = (props) => {
             
             
             <div className={classes.friends} >
-            <Paper className={classes.friend} elevation={0} >
+
+                { props.loading ? <CircularProgress /> : renderFriends() }
+            {/* <Paper className={classes.friend} elevation={0} >
                 <Avatar className={classes.avatar}>T</Avatar>
                 <Typography component="p" className={classes.friendText} gutterBottom>
                     This
@@ -212,7 +225,7 @@ const FriendsContainer = (props) => {
                 <Typography component="p" className={classes.friendText} gutterBottom>
                     Any
                 </Typography>
-            </Paper>
+            </Paper> */}
             </div>
         </CardContent>
         </Card>
@@ -222,8 +235,10 @@ const FriendsContainer = (props) => {
 const mapStateToProps = state => {
     return {
         users: state.search.users,
-        searching: state.search.searching
+        searching: state.search.searching,
+        friends: state.friends.friends,
+        loading: state.friends.loading,
     }
 }
 
-export default connect(mapStateToProps, { searchUsers, clearSearch })(FriendsContainer)
+export default connect(mapStateToProps, { searchUsers, clearSearch, addFriends, addRequests })(FriendsContainer)
