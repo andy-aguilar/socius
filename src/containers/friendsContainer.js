@@ -68,7 +68,6 @@ const useStyles = makeStyles({
         position: 'absolute',
         top: 67,
         zIndex: 1,
-        //overflow: 'scroll',
     },
     textField: {
         backgroundColor: "white",
