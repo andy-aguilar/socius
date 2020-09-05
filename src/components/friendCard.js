@@ -85,7 +85,9 @@ const addFriend = () => {
 
     return(
         <Paper className={classes.friend} elevation={0} >
-            <Avatar className={classes.avatar}>{props.user.first_name[0]}</Avatar>
+            {   props.user.image ?
+                <Avatar className={classes.avatar} src={props.user.image.url}></Avatar> :
+                <Avatar className={classes.avatar}>{props.user.first_name[0]}</Avatar>}
             <Typography component="p" className={classes.friendText} gutterBottom>
                 {`${props.user.first_name} ${props.user.last_name}`}
             </Typography>

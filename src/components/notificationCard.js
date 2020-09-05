@@ -95,7 +95,9 @@ const NotificationCard = (props) => {
     return(
         
         <Paper className={classes.friend} elevation={0} >
-            <Avatar className={classes.avatar}>{props.user.first_name[0]}</Avatar>
+            {   props.user.image ?
+                <Avatar className={classes.avatar} src={props.user.image.url}></Avatar> :
+                <Avatar className={classes.avatar}>{props.user.first_name[0]}</Avatar>}
             <p className={classes.friendText}>{ props.user.first_name + " " + props.user.last_name + " "} would like to be friends.</p>
             <IconButton className={classes.accept} onClick={acceptFriend}>
                 <CheckIcon className={classes.acceptCheck} />

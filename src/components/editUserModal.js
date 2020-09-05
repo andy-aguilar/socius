@@ -7,6 +7,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import {updateUser} from '../actions/userActions';
 import CloseIcon from '@material-ui/icons/Close';
+import AvatarEdit from './avatarEdit';
+import PreviewCard from './previewCard';
+
 
 
 
@@ -24,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     modalPaper: {
     position: 'absolute',
     width: '25em',
-    height: 400,
+    height: 800,
     backgroundColor: 'rgba(0,0,0,.80)',
     boxShadow: theme.shadows[5],
     //padding: theme.spacing(2, 4, 3),
@@ -39,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
         paddingBlockStart: '.67em',
         paddingBlockEnd: '.67em',
         marginBlockStart: 0,
+        marginBottom: 0,
     },
     form:{
         margin: theme.spacing(1),
@@ -84,6 +88,7 @@ function EditUserModal(props) {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
+    const [src, setSrc] = useState("")
     
 
 
@@ -91,21 +96,25 @@ function EditUserModal(props) {
     const handleClose = () => {
         props.hideEditUserModal()
         setFirstName("")
+        setSrc("")
     };
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const user={
+
+        let user={
             user: {
                 first_name: firstName,
                 last_name: lastName,
                 email_address: email,
             },
-
+            image: src
         }
+
         props.updateUser(user, localStorage.currentUser)
         e.target.reset()
         props.hideEditUserModal()
+
     }
 
     useEffect(() => {
@@ -127,7 +136,9 @@ function EditUserModal(props) {
                 <h1 id="simple-modal-title" className={classes.heading}>Edit Profile</h1>
                 <CloseIcon style={{cursor: 'pointer'}} className={classes.x} onClick={handleClose}/>
                 <form onSubmit={(e) => handleSubmit(e)} noValidate>
-                    <div className={classes.namesContainer}>
+                    <PreviewCard firstName={firstName} lastName={lastName} email={email} src={src} />
+                    <AvatarEdit user={props.user} setSrc={setSrc}/>
+                    <div className={classes.namesContainer} >
                         <TextField 
                             id="filled-search"
                             label="First Name"

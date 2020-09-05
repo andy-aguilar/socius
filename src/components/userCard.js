@@ -7,7 +7,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import trackimage from '../images/trackimage.jpg';
-import andy from '../images/andy.jpeg';
 import Avatar from '@material-ui/core/Avatar';
 import {connect} from 'react-redux';
 import { fetchUser } from '../actions/userActions';
@@ -16,6 +15,8 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { showEditUserModal } from '../actions/modalActions';
+
 
 const useStyles = makeStyles({
     root: {
@@ -56,18 +57,36 @@ const UserCard = (props) => {
         props.fetchUser(localStorage.currentUser)
     }, [])
 
+
+    const renderAvatar = () => {
+        return props.user.user.image ? 
+            <Avatar
+                alt={props.user.user.first_name}
+                src={props.user.user.image.url}
+                className={classes.avatar}>
+            </Avatar> :
+            <Avatar
+            alt={props.user.user.first_name}
+            className={classes.avatar}
+            >
+                Click here to add an image.
+            </Avatar>
+    }
+
     return (
         <Card className={classes.root}>
             { props.user.loading ? 
                 <CircularProgress /> :
                 <div>
-                    <CardActionArea>
+                    <CardActionArea
+                        onClick={ props.user.user.image ? null : showEditUserModal()}
+                    >
                         <CardMedia
                         className={classes.media}
                         image={trackimage}
                         title="track"
                         >
-                        <Avatar alt="Remy Sharp" src={andy} className={classes.avatar}></Avatar>
+                        {renderAvatar()}
                         </CardMedia>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
@@ -132,4 +151,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { fetchUser })(UserCard)
+export default connect(mapStateToProps, { fetchUser, showEditUserModal })(UserCard)

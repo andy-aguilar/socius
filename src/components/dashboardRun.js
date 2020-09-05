@@ -102,19 +102,19 @@ function DashboardRun(props) {
     const renderFriends = () => {
         let friends = run.users.filter(user => user.id !== run.user_owner_id)
         if (friends.length === 0){
-            return <Avatar aria-label="recipe" className={classes.avatarNoFriend} >
+            return <Avatar aria-label="user" className={classes.avatarNoFriend} >
             ...
         </Avatar>
         }
         else if(friends.length <= 3){
             return friends.map(user => 
-                <Avatar key={user.id} aria-label="recipe" className={classes.avatarFriend} >
+                <Avatar key={user.id} aria-label="user" src={user.image ? user.image.url : ""} className={classes.avatarFriend} >
                     {user.first_name[0]}
                 </Avatar>
         )}
         else{
             return friends.slice(0, 3).map( user =>  
-                <Avatar key={user.id} aria-label="recipe" className={classes.avatarFriend} >
+                <Avatar key={user.id} aria-label="user" src={user.image ? user.image.url : ""} className={classes.avatarFriend} >
                     {user.first_name[0]}
                 </Avatar>
             )
