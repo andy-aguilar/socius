@@ -158,7 +158,7 @@ function DashboardRun(props) {
         <Card className={classes.root}>
             <CardHeader
                 avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
+                    <Avatar aria-label="creator" className={classes.avatar} src={creator.image ? creator.image.url : ""}>
                         {creator['first_name'][0]}
                     </Avatar>
             }

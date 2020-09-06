@@ -9,6 +9,7 @@ import DashboardRun from '../components/dashboardRun'
 import UserCard from '../components/userCard'
 import FriendsContainer from '../containers/friendsContainer'
 import ClubsContainer from '../containers/clubsContainer'
+import DashboardRunsContainer from './dashboardRunsContainer'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -51,13 +52,6 @@ const DashboardContainer = (props) => {
         fetchRuns()
     }, [fetchRuns])
 
-    const renderRuns = () => {
-        //props.runs.runs.map(run => <li>{run.name}</li>)
-        return (props.runs.loading ? <CircularProgress /> : props.runs.runs.map(run => <DashboardRun key={run.id} run={run} creator={run.users.find(user => user.id === run.user_owner_id)}/>))
-        
-    }
-
-
     return(
     <div className={classes.root}>
         <div className={classes.spacer}></div>
@@ -72,7 +66,9 @@ const DashboardContainer = (props) => {
                 </Paper>
             </Grid>
             <Grid item xs={6}>
-                <Paper elevation={0} className={classes.paper}>{renderRuns()}</Paper>
+                <Paper elevation={0} className={classes.paper}>
+                    <DashboardRunsContainer runs={props.runs}/>
+                </Paper>
             </Grid>
             <Grid item xs={3}>
                 <Paper elevation={0} className={classes.paperSide}>

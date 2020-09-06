@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     modalPaper: {
     position: 'absolute',
     width: '25em',
-    height: 800,
+    height: 700,
     backgroundColor: 'rgba(0,0,0,.80)',
     boxShadow: theme.shadows[5],
     //padding: theme.spacing(2, 4, 3),
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 10,
     },
     button: {
-        marginTop: 20,
+        marginTop: 12,
         backgroundColor: "#f44336",
         color: "white",
     },
@@ -73,6 +73,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: '20px',
         marginRight: '20px',
         marginBottom: 5,
+        marginTop: 10,
     },
     names: {
         margin: 5,
@@ -113,6 +114,7 @@ function EditUserModal(props) {
 
         props.updateUser(user, localStorage.currentUser)
         e.target.reset()
+        setSrc("")
         props.hideEditUserModal()
 
     }
