@@ -141,7 +141,7 @@ function CreateRunModal(props) {
                     );
                 
                 map.on('click', (e) => {
-                    const modal = document.getElementsByClassName("makeStyles-modalPaper-1")[0];
+                    const modal = document.getElementsByClassName("makeStyles-modalPaper-9")[0];
                     const circle = modal.getElementsByClassName('mapboxgl-user-location-accuracy-circle')
                     const testMarker = modal.getElementsByClassName("mapboxgl-marker")
                     console.log(circle, testMarker)

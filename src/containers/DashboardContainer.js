@@ -49,7 +49,7 @@ const DashboardContainer = (props) => {
     const { fetchRuns } = props
 
     useEffect(() => {
-        fetchRuns()
+        fetchRuns(localStorage.currentUser)
     }, [fetchRuns])
 
     return(

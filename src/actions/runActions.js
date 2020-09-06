@@ -9,7 +9,7 @@ export const fetchRuns = () => {
                 "Authorization": `bearer ${localStorage.token}`
             }
         }
-        fetch(`${RUNURL}runs`, config).then(response => {
+        fetch(`${RUNURL}runs/friends/:id`, config).then(response => {
             return response.json()
         }).then(responseJSON => {
             dispatch({ type: 'ADD_RUNS', runs: responseJSON})
