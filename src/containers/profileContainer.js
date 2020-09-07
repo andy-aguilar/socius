@@ -2,17 +2,20 @@ import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 import {fetchUser} from '../actions/userActions';
+import {fetchUserRuns} from '../actions/runActions'
 import trackimage from '../images/trackimage.jpg';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Paper from '@material-ui/core/Paper';
+import ProfileRun from '../components/profileRun';
+import ProfileRunsContainer from './profileRunsContainer'
 
 const useStyles = makeStyles((theme) => ({
     root: {
         height: '100%',
         display: 'flex',
-        flexFlow: 'column',
+        flexDirection: 'column',
     },
     bottom: {
         display: 'flex',
@@ -21,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 100,
         marginTop: 10,
         marginBottom: 10,
-        flex: '1 1 auto',
+        flexGrow: 1,
+        flexShrink: 1,
     },
     header: {
         backgroundImage: `url(${trackimage})`,
@@ -29,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
         margin: 10,
         marginLeft: 100,
         marginRight: 100,
+        marginTop: 80,
         borderRadius: 5,
         display: 'flex',
         alignItems: 'center',
@@ -52,12 +57,13 @@ const useStyles = makeStyles((theme) => ({
     },
     bottomLeft:{
         height: '100%',
-        width: '70%',
+        width: '60%',
         marginRight: 10,
+        paddingTop: 10,
     },
     bottomRight:{
         height: '100%',
-        width: '30%',
+        width: '40%',
         marginRight: 10,
     }
 
@@ -72,6 +78,7 @@ const ProfileContainer = (props) => {
 
     useEffect(() => {
         props.fetchUser(props.match.params.id)
+        props.fetchUserRuns(props.match.params.id)
     }, [])
 
     const handleClick = (button) => {
@@ -101,7 +108,7 @@ const ProfileContainer = (props) => {
                 alt={props.user.user.first_name}
                 src={props.user.user.image ? props.user.user.image.url : ""}
                 className={classes.avatar}>
-                Click here to update image
+                No Image
             </Avatar>
             </div>
                 <ButtonGroup className={classes.buttons} variant="contained" color="secondary" aria-label="contained primary button group">
@@ -144,7 +151,9 @@ const ProfileContainer = (props) => {
                     
                 </ButtonGroup>
             <div className={classes.bottom}>
-                <Paper elevation={3} className={classes.bottomLeft}></Paper>
+                <Paper elevation={3} className={classes.bottomLeft}>
+                    { runsClicked ? <ProfileRunsContainer runs={props.runs} loading={props.runsLoading} /> : null}
+                </Paper>
                 <Paper elevation={3} className={classes.bottomRight}></Paper>
             </div>
         </div>
@@ -153,8 +162,11 @@ const ProfileContainer = (props) => {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user,
+        userLoading: state.user.loading,
+        runs: state.runs.userRuns,
+        runsLoading: state.runs.loadingUserRuns,
     }
 }
 
-export default connect(mapStateToProps, {fetchUser})(ProfileContainer)
+export default connect(mapStateToProps, {fetchUser, fetchUserRuns})(ProfileContainer)

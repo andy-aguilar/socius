@@ -1,4 +1,4 @@
-function runReducer(state = { runs: [], loading: false, creating: false, updating: false, runCreator: "", errorMessage: "" }, action){
+function runReducer(state = { runs: [], loading: false, creating: false, updating: false, runCreator: "", errorMessage: "", userRuns: [], loadingUserRuns: false, }, action){
     switch(action.type){
         case 'LOADING_RUNS':
             return {
@@ -44,6 +44,36 @@ function runReducer(state = { runs: [], loading: false, creating: false, updatin
                     runCreator: action.run.users.find(user => user.id === action.run.user_owner_id).first_name
                 }
             }
+        case "LOADING_USER_RUNS":
+            return {
+                ...state,
+                userRuns: [...state.userRuns],
+                loadingUserRuns: true
+            }
+        case "ADD_USER_RUNS":
+            return {
+                ...state,
+                userRuns: action.runs,
+                loadingUserRuns: false,
+            }
+        case "UPDATE_USER_RUNS":
+            if (action.run.error){
+                return {...state, 
+                    updating: false, 
+                    errorMessage: action.run.error
+                }
+            }
+            else{
+                const runIndex = state.userRuns.findIndex(run => run.id === action.run.id)
+                const newRuns = [...state.userRuns]
+                newRuns[runIndex] = action.run
+                return {...state,
+                    userRuns: newRuns,
+                    updating: false,
+                    //runCreator: action.run.users.find(user => user.id === action.run.user_owner_id).first_name
+                }
+            }
+            
         default:
             return state;
     }
