@@ -116,11 +116,11 @@ const FriendsContainer = (props) => {
     }, [])
 
     const renderUsers = () =>{
-        return props.users.map(user => <FriendCard key={user.id} user={user} friends={props.friends} addFriends={props.addFriends} />)
+        return props.users.map(user => <FriendCard key={user.id} user={user} friends={props.friends} addFriends={props.addFriends} pushProfile={props.pushProfile} />)
     }
 
     const renderFriends = () => {
-        return props.friends.map(user => <FriendCard key={user.id} user={user} friends={props.friends} addFriends={props.addFriends} />)
+        return props.friends.map(user => <FriendCard key={user.id} user={user} friends={props.friends} addFriends={props.addFriends} pushProfile={props.pushProfile} />)
     }
 
 
@@ -154,78 +154,8 @@ const FriendsContainer = (props) => {
                 null
             }
             
-            
-            
-            
             <div className={classes.friends} >
-
                 { props.loading ? <CircularProgress /> : renderFriends() }
-            {/* <Paper className={classes.friend} elevation={0} >
-                <Avatar className={classes.avatar}>T</Avatar>
-                <Typography component="p" className={classes.friendText} gutterBottom>
-                    This
-                </Typography>
-            </Paper>
-            <Paper className={classes.friend} elevation={0} >
-                <Avatar className={classes.avatar}>I</Avatar>
-                <Typography component="p" className={classes.friendText} gutterBottom>
-                    Is
-                </Typography>
-            </Paper>
-            <Paper className={classes.friend} elevation={0} >
-                <Avatar className={classes.avatar}>W</Avatar>
-                <Typography component="p" className={classes.friendText} gutterBottom>
-                    Where
-                </Typography>
-            </Paper>
-            <Paper className={classes.friend} elevation={0} >
-                <Avatar className={classes.avatar}>Y</Avatar>
-                <Typography component="p" className={classes.friendText} gutterBottom>
-                    Your
-                </Typography>
-            </Paper>
-            <Paper className={classes.friend} elevation={0} >
-                <Avatar className={classes.avatar}>F</Avatar>
-                <Typography component="p" className={classes.friendText} gutterBottom>
-                    Friends
-                </Typography>
-            </Paper>
-            <Paper className={classes.friend} elevation={0} >
-                <Avatar className={classes.avatar}>W</Avatar>
-                <Typography component="p" className={classes.friendText} gutterBottom>
-                    Would
-                </Typography>
-            </Paper>
-            <Paper className={classes.friend} elevation={0} >
-                <Avatar className={classes.avatar}>G</Avatar>
-                <Typography component="p" className={classes.friendText} gutterBottom>
-                    Go
-                </Typography>
-            </Paper>
-            <Paper className={classes.friend} elevation={0} >
-                <Avatar className={classes.avatar}>I</Avatar>
-                <Typography component="p" className={classes.friendText} gutterBottom>
-                    If
-                </Typography>
-            </Paper>
-            <Paper className={classes.friend} elevation={0} >
-                <Avatar className={classes.avatar}>Y</Avatar>
-                <Typography component="p" className={classes.friendText} gutterBottom>
-                    You
-                </Typography>
-            </Paper>
-            <Paper className={classes.friend} elevation={0} >
-                <Avatar className={classes.avatar}>H</Avatar>
-                <Typography component="p" className={classes.friendText} gutterBottom>
-                    Had
-                </Typography>
-            </Paper>
-            <Paper className={classes.friend} elevation={0} >
-                <Avatar className={classes.avatar}>A</Avatar>
-                <Typography component="p" className={classes.friendText} gutterBottom>
-                    Any
-                </Typography>
-            </Paper> */}
             </div>
         </CardContent>
         </Card>

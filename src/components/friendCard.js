@@ -5,13 +5,15 @@ import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import IconButton from '@material-ui/core/IconButton';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import Tooltip from '@material-ui/core/Tooltip';
+
 
 
 const useStyles = makeStyles({
     friend: {
-        padding: 10,
-        paddingLeft: 20,
+        padding: 0,
+        paddingLeft: 5,
         display: 'flex',
         position: 'relative',
         alignItems: 'center',
@@ -76,18 +78,31 @@ const addFriend = () => {
         }
         else{
             return <IconButton className={classes.addIcon} onClick={addFriend}>
-                    <PersonAddIcon color={'primary'}/>
+                    <Tooltip title="Add" placement="left">
+                        <PersonAddIcon color={'primary'}/>
+                    </Tooltip>
                 </IconButton>
         }
 
     }
 
 
+
+
     return(
         <Paper className={classes.friend} elevation={0} >
-            {   props.user.image ?
-                <Avatar className={classes.avatar} src={props.user.image.url}></Avatar> :
-                <Avatar className={classes.avatar}>{props.user.first_name[0]}</Avatar>}
+                <IconButton onClick={addFriend}>
+                    <Tooltip title={`${props.user.first_name}'s Profile`} placement="top-start">
+                        <Avatar 
+                            className={classes.avatar}
+                                src={props.user.image ?
+                                props.user.image.url : ""} 
+                            onClick={() => props.pushProfile(props.user.id)}
+                        >
+                            {props.user.first_name[0]}
+                        </Avatar>
+                    </Tooltip>
+                </IconButton>
             <Typography component="p" className={classes.friendText} gutterBottom>
                 {`${props.user.first_name} ${props.user.last_name}`}
             </Typography>

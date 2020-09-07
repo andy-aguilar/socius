@@ -14,6 +14,7 @@ import ChatIcon from '@material-ui/icons/Chat';
 import { connect } from 'react-redux';
 import { joinRun } from '../actions/runActions';
 import mapboxgl from 'mapbox-gl';
+import Tooltip from '@material-ui/core/Tooltip';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWFndWlsYXIzMTgiLCJhIjoiY2tlazNrOTlkMDMwcjJzb3Yyd20zYm9naSJ9.Ik_aGfxRFIrtj1Azc9jGXw';
 
@@ -163,9 +164,12 @@ function DashboardRun(props) {
                     </Avatar>
             }
             action={
-                <IconButton aria-label="joinRun" onClick={joinRun}>
-                    <AddCircleOutlineIcon color="primary" />
-                </IconButton>
+                
+                    <IconButton aria-label="joinRun" onClick={joinRun}>
+                        <Tooltip title="Join" placement="left">
+                        <AddCircleOutlineIcon color="primary" />
+                        </Tooltip>
+                    </IconButton>
             }
             title={run.name}
             subheader="September 14, 2020"

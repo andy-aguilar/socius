@@ -10,6 +10,19 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import {hideCreateRunSnackBar, hideUpdateError, hideUpdateSuccess, hideEditUserError, hideEditUserSuccess} from './actions/modalActions'
 import EditUserModal from './components/editUserModal';
+import ProfileContainer from './containers/profileContainer';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#F44336',
+    },
+    secondary: {
+      main: '#1D62A8',
+    },
+  },
+});
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -27,6 +40,7 @@ function App(props) {
   }
 
   return (
+    <ThemeProvider theme={theme}>
     <div className="App" style={{ height: '100%', display: 'flex', flexFlow: 'column'}}>
       <EditUserModal/>
       <CreateRunModal/>
@@ -68,9 +82,10 @@ function App(props) {
         <Route path='/' render={ routerProps => <NavBar {...routerProps}/>} />
         <Route exact path='/' render={ routerProps => <HomeContainer {...routerProps}/>} />
         <Route exact path='/dashboard' render={ routerProps => <DashboardContainer {...routerProps}/>} />
-        <Route dynamic path = '/listings/?'/>
+        <Route path = '/profile/:id' render={ routerProps => <ProfileContainer {...routerProps}/>} />
       </Router>
     </div>
+    </ThemeProvider>
   );
 }
 

@@ -43,6 +43,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+
+
 const DashboardContainer = (props) => {
     const classes = useStyles();
 
@@ -51,6 +53,10 @@ const DashboardContainer = (props) => {
     useEffect(() => {
         fetchRuns(localStorage.currentUser)
     }, [fetchRuns])
+
+    const pushProfile = (user) => {
+        props.history.push(`/profile/${user}`)
+    }
 
     return(
     <div className={classes.root}>
@@ -72,8 +78,8 @@ const DashboardContainer = (props) => {
             </Grid>
             <Grid item xs={3}>
                 <Paper elevation={0} className={classes.paperSide}>
-                    <FriendsContainer/>
-                    <ClubsContainer />
+                    <FriendsContainer pushProfile={pushProfile}/>
+                    {/* <ClubsContainer /> */}
                 </Paper>
             </Grid>
         </Grid>
