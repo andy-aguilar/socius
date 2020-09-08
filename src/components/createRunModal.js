@@ -84,11 +84,11 @@ function CreateRunModal(props) {
   // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = useState(getModalStyle);
     const [name, setName] = useState("")
-    const [time, setTime] = useState("2020-08-22T06:00")
+    const [time, setTime] = useState("2020-09-10T06:00")
     const [distance, setDistance] = useState(0)
-    const [longitude, setLongitude] = useState(0);
-    const [latitude, setLatitude] = useState(0);
-    const [zoom, setZoom] = useState(0);
+    const [longitude, setLongitude] = useState(-77.03680636144968);
+    const [latitude, setLatitude] = useState(38.89618501163949);
+    const [zoom, setZoom] = useState(12.02);
 
     let mapContainer
 

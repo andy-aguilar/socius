@@ -51,7 +51,7 @@ export const joinRun = (userRun) => {
             return response.json()
         }).then(responseJSON => {
             dispatch({ type: 'UPDATE_RUN', run: responseJSON})
-            dispatch({ type: 'UPDATE_USER_RUNS', run: responseJSON})
+            //dispatch({ type: 'UPDATE_USER_RUNS', run: responseJSON})
         })
     }
 }
@@ -73,3 +73,38 @@ export const fetchUserRuns = (user) => {
     }
 }
 
+export const fetchUserHistory = (user) => {
+    return (dispatch) => {
+        dispatch({type: 'LOADING_USER_HISTORY'})
+        let config = {
+            method: 'GET',
+            headers: {
+                'Authorization': `bearer ${localStorage.token}`
+            }
+        }
+        fetch(`${RUNURL}runs/userhistory/${user}`, config).then(resp => {
+            return resp.json()
+        }).then(respJSON => {
+            dispatch({ type: 'ADD_USER_HISTORY', runs: respJSON})
+        })
+    }
+}
+
+export const fetchFilteredRuns = (user, filters) => {
+    return (dispatch) => {
+        dispatch({ type: 'LOADING_RUNS'})
+        let config = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `bearer ${localStorage.token}`
+            },
+            body: JSON.stringify(filters)
+        }
+        fetch(`${RUNURL}runs/filter/${user}`, config).then(response => {
+            return response.json()
+        }).then(responseJSON => {
+            dispatch({ type: 'ADD_RUNS', runs: responseJSON})
+        })
+    }
+}

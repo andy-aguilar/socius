@@ -1,4 +1,4 @@
-function runReducer(state = { runs: [], loading: false, creating: false, updating: false, runCreator: "", errorMessage: "", userRuns: [], loadingUserRuns: false, }, action){
+function runReducer(state = { runs: [], loading: false, creating: false, updating: false, runCreator: "", errorMessage: "", userRuns: [], loadingUserRuns: false, userHistory: [], updatingHistory: false }, action){
     switch(action.type){
         case 'LOADING_RUNS':
             return {
@@ -73,7 +73,18 @@ function runReducer(state = { runs: [], loading: false, creating: false, updatin
                     //runCreator: action.run.users.find(user => user.id === action.run.user_owner_id).first_name
                 }
             }
-            
+        case "LOADING_USER_HISTORY":
+            return {
+                ...state, 
+                updatingHistory: true,
+                userHistory: [...state.userHistory]
+            }
+        case "ADD_USER_HISTORY":
+            return {
+                ...state,
+                userHistory: action.runs,
+                updatingHistory: false,
+            }
         default:
             return state;
     }

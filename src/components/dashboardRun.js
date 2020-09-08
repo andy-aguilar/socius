@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import { joinRun } from '../actions/runActions';
 import mapboxgl from 'mapbox-gl';
 import Tooltip from '@material-ui/core/Tooltip';
+import Moment from 'react-moment';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWFndWlsYXIzMTgiLCJhIjoiY2tlazNrOTlkMDMwcjJzb3Yyd20zYm9naSJ9.Ik_aGfxRFIrtj1Azc9jGXw';
 
@@ -172,7 +173,7 @@ function DashboardRun(props) {
                     </IconButton>
             }
             title={run.name}
-            subheader="September 14, 2020"
+            subheader={<Moment format='MMMM Do YYYY'>{run.date}</Moment>}
             />
             <div
                 className={classes.media}
@@ -183,7 +184,7 @@ function DashboardRun(props) {
                 <Typography variant="body2" color="textSecondary" component="p">
                     {`Miles: ${run.distance}`}<br/>
                     Pace: 8'00"<br/>
-                    Time: 6:00 a.m.
+                    Time: {<Moment format='h:mm a'>{run.date}</Moment>}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing style={{marginLeft: '5px'}}>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ProfileRun from '../components/profileRun'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import DashboardRun from '../components/dashboardRun'
 

@@ -62,6 +62,16 @@ export const hideNotifications = () => {
         dispatch({type: 'HIDE_NOTIFICATIONS'})
     }
 }
+export const showFilter = () => {
+    return (dispatch) => {
+        dispatch({type: 'SHOW_FILTER'})
+    }
+}
+export const hideFilter = () => {
+    return (dispatch) => {
+        dispatch({type: 'HIDE_FILTER'})
+    }
+}
 
 
 

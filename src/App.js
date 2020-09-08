@@ -10,6 +10,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import {hideCreateRunSnackBar, hideUpdateError, hideUpdateSuccess, hideEditUserError, hideEditUserSuccess} from './actions/modalActions'
 import EditUserModal from './components/editUserModal';
+import FilterModal from './components/filterModal'
 import ProfileContainer from './containers/profileContainer';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
@@ -44,6 +45,7 @@ function App(props) {
     <div className="App" style={{ height: '100%', display: 'flex', flexFlow: 'column'}}>
       <EditUserModal/>
       <CreateRunModal/>
+      <FilterModal />
       <Snackbar open={props.createSuccess} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           Run Created

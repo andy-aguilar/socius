@@ -2,14 +2,14 @@ import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 import {fetchUser} from '../actions/userActions';
-import {fetchUserRuns} from '../actions/runActions'
+import {fetchUserRuns, fetchUserHistory} from '../actions/runActions'
 import trackimage from '../images/trackimage.jpg';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Paper from '@material-ui/core/Paper';
-import ProfileRun from '../components/profileRun';
 import ProfileRunsContainer from './profileRunsContainer'
+import Calendar from './calendarContainer'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,29 +57,60 @@ const useStyles = makeStyles((theme) => ({
     },
     bottomLeft:{
         height: '100%',
-        width: '60%',
-        marginRight: 10,
+        width: '59%',
         paddingTop: 10,
+        marginRight: 10,
     },
     bottomRight:{
         height: '100%',
-        width: '40%',
-        marginRight: 10,
+        width: '39%',
+        //marginRight: 10,
+    },
+    heading: {
+        marginTop: 0,
+        marginLeft: 100,
+        marginRight: 100,
+        borderBottom: "1px grey solid",
+        paddingBottom: 10,
     }
 
 }));
 
 const ProfileContainer = (props) => {
     const classes = useStyles();
-    const [runsClicked, setRunsClicked] = useState(true)
+    const [runsClicked, setRunsClicked] = useState(false)
     const [friendsClicked, setFriendsClicked] = useState(false)
-    const [calendarClicked, setCalendarClicked] = useState(false)
+    const [calendarClicked, setCalendarClicked] = useState(true)
     const [historyClicked, setHistoryClicked] = useState(false)
+    const [style, setStyle] = useState({})
 
     useEffect(() => {
         props.fetchUser(props.match.params.id)
         props.fetchUserRuns(props.match.params.id)
+        props.fetchUserHistory(props.match.params.id)
     }, [])
+
+    const handleScroll = (e) => {
+        if(e.target.documentElement){
+            if(e.target.documentElement.scrollTop >= 344){
+                    setStyle({
+                        position: "fixed",
+                        right: "100px",
+                        top: "70px",
+                        width:"34.5%",
+                    })
+            }
+            else{
+                setStyle({})
+            }
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, true);
+    }, [])
+
+
 
     const handleClick = (button) => {
         setRunsClicked(false)
@@ -100,6 +131,21 @@ const ProfileContainer = (props) => {
         }
     }
 
+    const renderPage = () => {
+        if(runsClicked){
+            return <ProfileRunsContainer runs={props.runs} loading={props.runsLoading} />
+        }
+        else if (historyClicked){
+            return <ProfileRunsContainer runs={props.userHistory} loading={props.historyLoading} />
+        }
+        else if (calendarClicked){
+            return <Calendar />
+        }
+        else{
+            return <p>Sorry, you haven't built that yet</p>
+        }
+    }
+
     return(
         <div className={classes.root}>
             <div className={classes.spacer}></div>
@@ -111,6 +157,7 @@ const ProfileContainer = (props) => {
                 No Image
             </Avatar>
             </div>
+    <h1 id="simple-modal-title" className={classes.heading}>{props.user.user.first_name + " " + props.user.user.last_name}</h1>
                 <ButtonGroup className={classes.buttons} variant="contained" color="secondary" aria-label="contained primary button group">
                     <Button className={classes.button}
                         style={ runsClicked ?
@@ -152,9 +199,9 @@ const ProfileContainer = (props) => {
                 </ButtonGroup>
             <div className={classes.bottom}>
                 <Paper elevation={3} className={classes.bottomLeft}>
-                    { runsClicked ? <ProfileRunsContainer runs={props.runs} loading={props.runsLoading} /> : null}
+                    {renderPage()}
                 </Paper>
-                <Paper elevation={3} className={classes.bottomRight}></Paper>
+                <Paper elevation={3} className={classes.bottomRight} style={style}></Paper>
             </div>
         </div>
     )
@@ -166,7 +213,9 @@ const mapStateToProps = state => {
         userLoading: state.user.loading,
         runs: state.runs.userRuns,
         runsLoading: state.runs.loadingUserRuns,
+        userHistory: state.runs.userHistory,
+        historyLoading: state.runs.updatingHistory
     }
 }
 
-export default connect(mapStateToProps, {fetchUser, fetchUserRuns})(ProfileContainer)
+export default connect(mapStateToProps, {fetchUser, fetchUserRuns, fetchUserHistory})(ProfileContainer)

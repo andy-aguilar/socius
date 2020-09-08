@@ -10,6 +10,8 @@ import UserCard from '../components/userCard'
 import FriendsContainer from '../containers/friendsContainer'
 import ClubsContainer from '../containers/clubsContainer'
 import DashboardRunsContainer from './dashboardRunsContainer'
+import {showFilter} from '../actions/modalActions'
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,6 +42,12 @@ const useStyles = makeStyles((theme) => ({
     },
     spacer:{
         height: '64px',
+    },
+    filter:{
+        color: '#F44336',
+        position: 'absolute',
+        right: '27.5%',
+        cursor: "pointer"
     }
 }));
 
@@ -58,9 +66,10 @@ const DashboardContainer = (props) => {
         props.history.push(`/profile/${user}`)
     }
 
+
     return(
     <div className={classes.root}>
-        <div className={classes.spacer}></div>
+        <div className={classes.spacer} ></div>
         <Grid container
             direction="row" 
             spacing={2}
@@ -73,6 +82,7 @@ const DashboardContainer = (props) => {
             </Grid>
             <Grid item xs={6}>
                 <Paper elevation={0} className={classes.paper}>
+                    <span className={classes.filter} onClick={props.showFilter}>Filter</span>
                     <DashboardRunsContainer runs={props.runs}/>
                 </Paper>
             </Grid>
@@ -93,4 +103,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { fetchRuns })(DashboardContainer)
+export default connect(mapStateToProps, { fetchRuns, showFilter })(DashboardContainer)
