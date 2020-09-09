@@ -20,11 +20,11 @@ class DashboardRunsContainer extends Component {
     }
 
     componentDidUpdate() {
-        if (this.props.runs.runs.length !== this.state.runs.length){
-            if(this.props.runs.runs.length === 5){
+        if (this.props.runs.length !== this.state.runs.length){
+            if(this.props.runs.length === 5){
                 this.setState({
-                    runs: this.props.runs.runs,
-                    renderedRuns: this.props.runs.runs.slice(0, 2)
+                    runs: this.props.runs,
+                    renderedRuns: this.props.runs.slice(0, 2)
                 })
             }
         }
@@ -44,7 +44,7 @@ class DashboardRunsContainer extends Component {
     }
 
     renderRuns = () => {
-        //props.runs.runs.map(run => <li>{run.name}</li>)
+        //props.runs.map(run => <li>{run.name}</li>)
         return (this.props.runs.loading ? <CircularProgress /> : this.state.renderedRuns.map(run => <DashboardRun key={run.id} run={run} creator={run.users.find(user => user.id === run.user_owner_id)}/>))
         
     }

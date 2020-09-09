@@ -97,7 +97,7 @@ const DashboardContainer = (props) => {
 
 const mapStateToProps = state => {
     return {
-        runs: state.runs
+        runs: state.runs.runs
     }
 }
 

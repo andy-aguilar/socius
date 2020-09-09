@@ -16,6 +16,8 @@ import { joinRun } from '../actions/runActions';
 import mapboxgl from 'mapbox-gl';
 import Tooltip from '@material-ui/core/Tooltip';
 import Moment from 'react-moment';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
+import EditIcon from '@material-ui/icons/Edit';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWFndWlsYXIzMTgiLCJhIjoiY2tlazNrOTlkMDMwcjJzb3Yyd20zYm9naSJ9.Ik_aGfxRFIrtj1Azc9jGXw';
 
@@ -101,6 +103,14 @@ function DashboardRun(props) {
         props.joinRun(userRun)
     }
 
+    const leaveRun = () => {
+        console.log("leaving")
+    }
+
+    const editRun = () => {
+        console.log("editing")
+    }
+
     const renderFriends = () => {
         let friends = run.users.filter(user => user.id !== run.user_owner_id)
         if (friends.length === 0){
@@ -122,6 +132,31 @@ function DashboardRun(props) {
             )
         }
         
+    }
+
+    const renderButton = () => {
+        
+        if(run.user_owner_id === localStorage.currentUser){
+            return <IconButton aria-label="editRun" onClick={editRun}>
+                    <Tooltip title="Edit Run" placement="left">
+                        <EditIcon color="primary" />
+                    </Tooltip>
+                </IconButton>
+        }
+        else if(run.users.find(user => user.id === parseInt(localStorage.currentUser, 10))){
+            return <IconButton aria-label="leaveRun" onClick={leaveRun}>
+                        <Tooltip title="Leave Run" placement="left">
+                            <RemoveCircleOutlineIcon color="primary" />
+                        </Tooltip>
+                    </IconButton>
+        }
+        else{
+            return <IconButton aria-label="joinRun" onClick={joinRun}>
+                            <Tooltip title="Join" placement="left">
+                                <AddCircleOutlineIcon color="primary" />
+                            </Tooltip>
+                        </IconButton>
+        }
     }
 
     const renderFriendsText = () => {
@@ -165,12 +200,7 @@ function DashboardRun(props) {
                     </Avatar>
             }
             action={
-                
-                    <IconButton aria-label="joinRun" onClick={joinRun}>
-                        <Tooltip title="Join" placement="left">
-                        <AddCircleOutlineIcon color="primary" />
-                        </Tooltip>
-                    </IconButton>
+                renderButton()
             }
             title={run.name}
             subheader={<Moment format='MMMM Do YYYY'>{run.date}</Moment>}
@@ -212,5 +242,10 @@ function DashboardRun(props) {
     )
 }
 
+const mapStateToProps = state => {
+    return {
+        runs: state.runs.runs
+    }
+}
 
-export default connect(null, { joinRun })(DashboardRun)
+export default connect(mapStateToProps, { joinRun })(DashboardRun)
