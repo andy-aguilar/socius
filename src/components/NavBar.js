@@ -82,6 +82,11 @@ function MenuAppBar(props) {
     props.history.push("/dashboard")
   }
 
+  const pushProfile = () => {
+    props.history.push(`/profile/${localStorage.currentUser}`)
+    handleClose()
+  }
+
   return (
     <div className={classes.root}>
       <AppBar elevation={3} position="fixed" style={{backgroundColor: "#f44336"}}>
@@ -106,7 +111,7 @@ function MenuAppBar(props) {
                   horizontal: 'right',
                 }}
                 badgeContent={props.requests.length}
-                color="primary"
+                color="secondary"
               >
                 <NotificationsIcon onClick={() => setNotifications(!notifications)}/>
                 </Badge>
@@ -145,7 +150,7 @@ function MenuAppBar(props) {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={pushProfile}>Profile</MenuItem>
                 <MenuItem onClick={handleEdit}>Edit Profile</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>

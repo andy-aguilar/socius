@@ -80,7 +80,7 @@ const UserCard = (props) => {
                 <CircularProgress /> :
                 <div>
                     <CardActionArea
-                        onClick={ props.user.user.image ? null : props.showEditUserModal}
+                        onClick={ props.user.user.image ? () => {props.pushProfile(props.user.user.id)} : props.showEditUserModal}
                     >
                         <CardMedia
                         className={classes.media}

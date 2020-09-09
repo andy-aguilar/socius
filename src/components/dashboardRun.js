@@ -135,8 +135,7 @@ function DashboardRun(props) {
     }
 
     const renderButton = () => {
-        
-        if(run.user_owner_id === localStorage.currentUser){
+        if(run.user_owner_id === parseInt(localStorage.currentUser)){
             return <IconButton aria-label="editRun" onClick={editRun}>
                     <Tooltip title="Edit Run" placement="left">
                         <EditIcon color="primary" />

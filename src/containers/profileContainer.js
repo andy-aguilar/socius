@@ -78,9 +78,9 @@ const useStyles = makeStyles((theme) => ({
 
 const ProfileContainer = (props) => {
     const classes = useStyles();
-    const [runsClicked, setRunsClicked] = useState(false)
+    const [runsClicked, setRunsClicked] = useState(true)
     const [friendsClicked, setFriendsClicked] = useState(false)
-    const [calendarClicked, setCalendarClicked] = useState(true)
+    const [calendarClicked, setCalendarClicked] = useState(false)
     const [historyClicked, setHistoryClicked] = useState(false)
     const [style, setStyle] = useState({})
 
@@ -201,7 +201,9 @@ const ProfileContainer = (props) => {
                 <Paper elevation={3} className={classes.bottomLeft}>
                     {renderPage()}
                 </Paper>
-                <Paper elevation={3} className={classes.bottomRight} style={style}></Paper>
+                <Paper elevation={3} className={classes.bottomRight} style={style}>
+                    <h4>TEST</h4>
+                </Paper>
             </div>
         </div>
     )

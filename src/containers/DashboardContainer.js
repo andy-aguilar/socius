@@ -46,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         right: '27.5%',
         cursor: "pointer"
-    }
+    },
+
 }));
 
 
@@ -58,7 +59,7 @@ const DashboardContainer = (props) => {
 
     useEffect(() => {
         fetchRuns(localStorage.currentUser)
-    }, [fetchRuns])
+    }, [fetchRuns, props.force])
 
     const pushProfile = (user) => {
         props.history.push(`/profile/${user}`)
@@ -75,12 +76,13 @@ const DashboardContainer = (props) => {
         >
             <Grid item xs={3}>
                 <Paper elevation={0} className={classes.paperSide}>
-                    <UserCard />
+                    <UserCard pushProfile={pushProfile}/>
                 </Paper>
             </Grid>
             <Grid item xs={6}>
                 <Paper elevation={0} className={classes.paper}>
                     <span className={classes.filter} onClick={props.showFilter}>Filter</span>
+                    { props.runs.length === 0 ? <span>There are no runs to display. Tell your friends to add runs!</span> : null }
                     <DashboardRunsContainer runs={props.runs}/>
                 </Paper>
             </Grid>
@@ -97,7 +99,8 @@ const DashboardContainer = (props) => {
 
 const mapStateToProps = state => {
     return {
-        runs: state.runs.runs
+        runs: state.runs.runs,
+        force: state.runs.updating
     }
 }
 

@@ -92,7 +92,7 @@ const SignupForm = (props) => {
             <h1 className={classes.login}> Join Socius Today!</h1>
                 <div className={classes.namesContainer}>
                     <TextField 
-                        id="filled-search"
+                        id="firstName"
                         label="First Name"
                         type="search"
                         variant="filled"
@@ -101,7 +101,7 @@ const SignupForm = (props) => {
                         onChange={(e) => setFirstName(e.target.value)}
                     />
                     <TextField 
-                        id="filled-search"
+                        id="lastName"
                         label="Last Name"
                         type="search"
                         variant="filled"
@@ -111,7 +111,7 @@ const SignupForm = (props) => {
                     />
                 </div>
                 <TextField 
-                    id="filled-search"
+                    id="email"
                     label="Email Address"
                     type="search"
                     variant="filled"
