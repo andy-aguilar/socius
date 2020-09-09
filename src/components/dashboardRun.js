@@ -12,7 +12,7 @@ import { red } from '@material-ui/core/colors';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ChatIcon from '@material-ui/icons/Chat';
 import { connect } from 'react-redux';
-import { joinRun } from '../actions/runActions';
+import { joinRun, leaveRun } from '../actions/runActions';
 import mapboxgl from 'mapbox-gl';
 import Tooltip from '@material-ui/core/Tooltip';
 import Moment from 'react-moment';
@@ -104,7 +104,7 @@ function DashboardRun(props) {
     }
 
     const leaveRun = () => {
-        console.log("leaving")
+        props.leaveRun(localStorage.currentUser, props.run.id)
     }
 
     const editRun = () => {
@@ -248,4 +248,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { joinRun })(DashboardRun)
+export default connect(mapStateToProps, { joinRun, leaveRun })(DashboardRun)

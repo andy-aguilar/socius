@@ -54,7 +54,7 @@ function App(props) {
       <Snackbar open={props.updateSuccess} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           { props.creator ? 
-            `You joined ${props.creator}'s run!` :
+            `${props.creator}'s run updated!` :
             "You joined the run!"
           }
         </Alert>

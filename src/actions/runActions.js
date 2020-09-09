@@ -56,23 +56,23 @@ export const joinRun = (userRun) => {
     }
 }
 
-// export const leaveRun = (user, run) => {
-//     return (dispatch) => {
-//         dispatch({type: 'JOINING_RUN'})
-//         let config = {
-//             method: 'DELETE',
-//             headers: {
-//                 "Authorization": `bearer ${localStorage.token}`
-//             }
-//         }
-//         fetch(`${RUNURL}runs/${user}/${run}`, config).then(response => {
-//             return response.json()
-//         }).then(responseJSON => {
-//             dispatch({ type: 'UPDATE_RUN', run: responseJSON})
-//             //dispatch({ type: 'UPDATE_USER_RUNS', run: responseJSON})
-//         })
-//     }
-// }
+export const leaveRun = (user, run) => {
+    return (dispatch) => {
+        dispatch({type: 'JOINING_RUN'})
+        let config = {
+            method: 'DELETE',
+            headers: {
+                "Authorization": `bearer ${localStorage.token}`
+            }
+        }
+        fetch(`${RUNURL}runs/leave/${user}/${run}`, config).then(response => {
+            return response.json()
+        }).then(responseJSON => {
+            dispatch({ type: 'UPDATE_RUN', run: responseJSON})
+            //dispatch({ type: 'UPDATE_USER_RUNS', run: responseJSON})
+        })
+    }
+}
 
 export const fetchUserRuns = (user) => {
     return (dispatch) => {
