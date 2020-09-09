@@ -7,6 +7,16 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
+import SearchIcon from '@material-ui/icons/Search';
+import IconButton from '@material-ui/core/IconButton';
+import pacers from '../images/pacers.jpeg';
+import novemberProject from '../images/novemberProject.jpg';
+import frontRunners from '../images/frontRunners.jpg';
+import potomacRiver from '../images/potomacRiver.jpg';
+import georgetown from '../images/georgetown.jpg';
+import moCo from '../images/moCo.jpg';
+import dccs from '../images/dcCapitalStriders.jpg';
+import districtRunning from '../images/districtRunning.jpg';
 
 const useStyles = makeStyles({
     root: {
@@ -15,8 +25,11 @@ const useStyles = makeStyles({
     title: {
         fontSize: '28px',
         lineHeight: '50px',
-        backgroundColor: '#bdbdbd',
-        color: 'white',
+        //backgroundColor: '#bdbdbd',
+        color: 'black',
+        textAlign: 'left',
+        borderBottom: '1px grey groove'
+
     },
     pos: {
         marginBottom: 12,
@@ -38,89 +51,83 @@ const useStyles = makeStyles({
     clubs:{
         height: 220,
         overflow: "scroll",
+        borderBottom: '1px grey groove'
     },
     clubText:{
         // fontSize: 18,
         paddingLeft: 8,
         marginBottom: 0,
-    }
+    },
+    searchIcon:{
+        position: 'absolute',
+        top: '375px',
+        right: '20px',
+    },
 });
 
 const ClubsContainer = () => {
     const classes = useStyles();
 
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root} elevation={0}>
         <CardContent style={{padding: '0px', paddingRight: '0px', paddingLeft: '0px'}}>
             <Typography variant="h4" component="h2" className={classes.title} gutterBottom>
                 Clubs
             </Typography>
+            <IconButton className={classes.searchIcon} aria-label="joinRun">
+                <SearchIcon />
+            </IconButton>
             <div className={classes.clubs}>
             <Paper className={classes.club} elevation={0} >
-                <Avatar className={classes.avatar}>Y</Avatar>
+                <Avatar className={classes.avatar} src={pacers} ></Avatar>
                 <Typography component="p" className={classes.clubText} gutterBottom>
-                    You
+                    Pacers
                 </Typography>
             </Paper>
             <Paper className={classes.club} elevation={0} >
-                <Avatar className={classes.avatar}>C</Avatar>
-                <Typography component="p" className={classes.clubText} gutterBottom>
-                    Could
+                <Avatar className={classes.avatar} src={novemberProject}></Avatar>
+                <Typography component="p" className={classes.clubText}  gutterBottom>
+                    November Project
                 </Typography>
             </Paper>
             <Paper className={classes.club} elevation={0} >
-                <Avatar className={classes.avatar}>A</Avatar>
+                <Avatar className={classes.avatar} src={frontRunners} ></Avatar>
                 <Typography component="p" className={classes.clubText} gutterBottom>
-                    Also
+                    DC Front Runners
                 </Typography>
             </Paper>
             <Paper className={classes.club} elevation={0} >
-                <Avatar className={classes.avatar}>J</Avatar>
+                <Avatar className={classes.avatar} src={potomacRiver}>J</Avatar>
                 <Typography component="p" className={classes.clubText} gutterBottom>
-                    Join
+                    Potomac River Running Co.
                 </Typography>
             </Paper>
             <Paper className={classes.club} elevation={0} >
-                <Avatar className={classes.avatar}>C</Avatar>
+                <Avatar className={classes.avatar} src={georgetown}></Avatar>
                 <Typography component="p" className={classes.clubText} gutterBottom>
-                    Clubs
+                    Georgetown Running Club
                 </Typography>
             </Paper>
             <Paper className={classes.club} elevation={0} >
-                <Avatar className={classes.avatar}>I</Avatar>
+                <Avatar className={classes.avatar} src={moCo}></Avatar>
                 <Typography component="p" className={classes.clubText} gutterBottom>
-                    If
+                    Montgomery County Road Runners
                 </Typography>
             </Paper>
             <Paper className={classes.club} elevation={0} >
-                <Avatar className={classes.avatar}>Y</Avatar>
+                <Avatar className={classes.avatar} src={dccs}></Avatar>
                 <Typography component="p" className={classes.clubText} gutterBottom>
-                    You
+                    DC Capital Striders
                 </Typography>
             </Paper>
             <Paper className={classes.club} elevation={0} >
-                <Avatar className={classes.avatar}>W</Avatar>
+                <Avatar className={classes.avatar} src={districtRunning}></Avatar>
                 <Typography component="p" className={classes.clubText} gutterBottom>
-                    Weren't
-                </Typography>
-            </Paper>
-            <Paper className={classes.club} elevation={0} >
-                <Avatar className={classes.avatar}>S</Avatar>
-                <Typography component="p" className={classes.clubText} gutterBottom>
-                    So
-                </Typography>
-            </Paper>
-            <Paper className={classes.club} elevation={0} >
-                <Avatar className={classes.avatar}>L</Avatar>
-                <Typography component="p" className={classes.clubText} gutterBottom>
-                    Lazy
+                    District Running Collective
                 </Typography>
             </Paper>
             </div>
         </CardContent>
-        <CardActions>
-            <Button size="small">Find clubs</Button>
-        </CardActions>
         </Card>
     );
 }

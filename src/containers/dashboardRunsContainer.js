@@ -21,10 +21,12 @@ class DashboardRunsContainer extends Component {
 
     componentDidUpdate() {
         if (this.props.runs.runs.length != this.state.runs.length){
-            this.setState({
-                runs: this.props.runs.runs,
-                renderedRuns: this.props.runs.runs.slice(0, 2)
-            })
+            if(this.props.runs.runs.length === 5){
+                this.setState({
+                    runs: this.props.runs.runs,
+                    renderedRuns: this.props.runs.runs.slice(0, 2)
+                })
+            }
         }
     }
 

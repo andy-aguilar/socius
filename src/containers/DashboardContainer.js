@@ -89,7 +89,7 @@ const DashboardContainer = (props) => {
             <Grid item xs={3}>
                 <Paper elevation={0} className={classes.paperSide}>
                     <FriendsContainer pushProfile={pushProfile}/>
-                    {/* <ClubsContainer /> */}
+                    <ClubsContainer />
                 </Paper>
             </Grid>
         </Grid>
