@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { connect } from 'react-redux';
@@ -103,13 +103,13 @@ function FilterModal(props) {
     const [range, setRange] = useState([0, 26])
     
 
-    const setDefaultState = () => {
-        setMinDate('2020-01-01T00:00:00')
-        setMaxDate('2025-12-31T00:00:00')
-        setMinTime('00:00:00')
-        setMaxTime('23:59:00')
-        setRange([0, 26])
-    }
+    // const setDefaultState = () => {
+    //     setMinDate('2020-01-01T00:00:00')
+    //     setMaxDate('2025-12-31T00:00:00')
+    //     setMinTime('00:00:00')
+    //     setMaxTime('23:59:00')
+    //     setRange([0, 26])
+    // }
 
     const handleClose = () => {
         props.hideFilter()

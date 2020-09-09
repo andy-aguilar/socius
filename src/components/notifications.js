@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles, withTheme } from '@material-ui/core/styles';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import NotificationCard from './notificationCard';
 import Typography from '@material-ui/core/Typography';

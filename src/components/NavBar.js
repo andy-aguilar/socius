@@ -86,7 +86,7 @@ function MenuAppBar(props) {
     <div className={classes.root}>
       <AppBar elevation={3} position="fixed" style={{backgroundColor: "#f44336"}}>
         <Toolbar className={classes.toolbar}>
-          <img src={logoGrey} style={{height: '64px', cursor: 'pointer'}} onClick={dashboard}  />
+          <img src={logoGrey} alt={'Socius'} style={{height: '64px', cursor: 'pointer'}} onClick={dashboard}  />
           <Typography variant="h4" className={classes.title} onClick={dashboard} style={{cursor: 'pointer'}} >
             Socius
           </Typography>

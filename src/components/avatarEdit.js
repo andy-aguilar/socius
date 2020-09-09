@@ -1,6 +1,5 @@
 import React from 'react';
 import Avatar from 'react-avatar-edit';
-import andy from '../images/andy.jpeg';
 
 
 class AvatarEdit extends React.Component {

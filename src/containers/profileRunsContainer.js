@@ -19,7 +19,7 @@ class ProfileRunsContainer extends Component {
     }
 
     componentDidUpdate() {
-        if(this.props.runs.length != this.state.runs.length){
+        if(this.props.runs.length !== this.state.runs.length){
             this.setState({
                 runs: this.props.runs,
                 renderedRuns: this.props.runs.slice(0, 6)
@@ -31,7 +31,7 @@ class ProfileRunsContainer extends Component {
         if(e.target.documentElement){
             if(e.target.documentElement.scrollHeight - Math.floor(e.target.documentElement.scrollTop) === ( e.target.documentElement.clientHeight) ){
                 console.log('bottom')
-                if(this.state.renderedRuns.length != this.state.runs.length){
+                if(this.state.renderedRuns.length !== this.state.runs.length){
                     this.setState({
                         renderedRuns: [...this.state.renderedRuns, ...this.state.runs.slice(this.state.index, this.state.index + 2)],
                         index: this.state.index + 2

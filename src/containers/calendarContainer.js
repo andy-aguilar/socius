@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import Paper from '@material-ui/core/Paper';
 import { ViewState } from '@devexpress/dx-react-scheduler';
 import {
     Scheduler,
@@ -29,7 +28,7 @@ const Calendar = (props) => {
 
     useEffect(() => {
         if(props.runs.length > 0 && props.userHistory.length > 0){
-            if(props.runs.length + props.userHistory.length != data.length){
+            if(props.runs.length + props.userHistory.length !== data.length){
                 let allRuns = [...props.runs, ...props.userHistory]
                 let schedulerD = allRuns.map(run => {
                     let foo = run.date.split('T')[0].split('-').map(date => parseInt(date, 10))
@@ -40,7 +39,7 @@ const Calendar = (props) => {
                 setData(schedulerD)
             }
         }
-    }, [props.runs, props.userHistory])
+    }, [props.runs, props.userHistory, data])
 
     return(
         <div>

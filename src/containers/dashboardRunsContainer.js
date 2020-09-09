@@ -20,7 +20,7 @@ class DashboardRunsContainer extends Component {
     }
 
     componentDidUpdate() {
-        if (this.props.runs.runs.length != this.state.runs.length){
+        if (this.props.runs.runs.length !== this.state.runs.length){
             if(this.props.runs.runs.length === 5){
                 this.setState({
                     runs: this.props.runs.runs,
@@ -33,7 +33,7 @@ class DashboardRunsContainer extends Component {
     handleScroll = (e) => {
         if(e.target.documentElement){
             if(e.target.documentElement.scrollHeight - Math.floor(e.target.documentElement.scrollTop) === ( e.target.documentElement.clientHeight) ){
-                if(this.state.renderedRuns.length != this.state.runs.length){
+                if(this.state.renderedRuns.length !== this.state.runs.length){
                     this.setState({
                         renderedRuns: [...this.state.renderedRuns, ...this.state.runs.slice(this.state.index, this.state.index + 2)],
                         index: this.state.index + 2

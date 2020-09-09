@@ -4,8 +4,6 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import {fetchRuns} from '../actions/runActions';
 import {connect} from 'react-redux';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import DashboardRun from '../components/dashboardRun'
 import UserCard from '../components/userCard'
 import FriendsContainer from '../containers/friendsContainer'
 import ClubsContainer from '../containers/clubsContainer'

@@ -59,6 +59,7 @@ const UserCard = (props) => {
 
 
     const renderAvatar = () => {
+        console.log(props.user)
         return props.user.user.image ? 
             <Avatar
                 alt={props.user.user.first_name}
@@ -99,7 +100,7 @@ const UserCard = (props) => {
                                     <th className={classes.th}>Runs</th>
                                 </tr>
                                 <tr>
-                                    <td>0</td>
+                                    <td>{props.friends.length}</td>
                                     <td>0</td>
                                 </tr>
                                 </tbody>
@@ -147,7 +148,8 @@ const UserCard = (props) => {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user,
+        friends: state.friends.friends
     }
 }
 
