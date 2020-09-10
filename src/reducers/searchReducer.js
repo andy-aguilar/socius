@@ -14,6 +14,8 @@ function searchReducer(state = {users: [], searching: false}, action){
             return {...state,
             users: []
             }
+        case "RESET_TO_DEFAULT":
+            return {...state, users: [], searching: false}
         default:
             return state
     }

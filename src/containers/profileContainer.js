@@ -9,7 +9,10 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Paper from '@material-ui/core/Paper';
 import ProfileRunsContainer from './profileRunsContainer'
-import Calendar from './calendarContainer'
+import Calendar from './calendarContainer';
+import {fetchUserStats} from '../actions/userActions';
+import { TextareaAutosize } from '@material-ui/core';
+import ProfileClubs from './profileClubs';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -72,7 +75,23 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 100,
         borderBottom: "1px grey solid",
         paddingBottom: 10,
-    }
+    },
+    table: {
+        margin: 'auto',
+        width: 320,
+        textAlign: 'left',
+    },
+    th:{
+        paddingLeft: 10,
+        borderBottom: "1px grey groove",
+    },
+    grey: {
+        paddingLeft: 10,
+        backgroundColor: '#eeeeee'
+    },
+    white: {
+        paddingLeft: 10,
+    },
 
 }));
 
@@ -88,6 +107,7 @@ const ProfileContainer = (props) => {
         props.fetchUser(props.match.params.id)
         props.fetchUserRuns(props.match.params.id)
         props.fetchUserHistory(props.match.params.id)
+        props.fetchUserStats(props.match.params.id)
     }, [])
 
     const handleScroll = (e) => {
@@ -202,7 +222,48 @@ const ProfileContainer = (props) => {
                     {renderPage()}
                 </Paper>
                 <Paper elevation={3} className={classes.bottomRight} style={style}>
-                    <h4>TEST</h4>
+                    <h1>Runner Stats</h1>
+                    <table className={classes.table}>
+                        <tbody>
+                                <tr>
+                                    <th className={classes.th}>Category</th>
+                                    <th className={classes.th}>Total</th>
+                                </tr>
+                                <tr>
+                                    <td className={classes.grey}>Total Runs</td>
+                                    <td className={classes.grey}>{props.stats.all_runs}</td>
+                                </tr>
+                                <tr>
+                                    <td className={classes.white}>Total Future Runs</td>
+                                    <td className={classes.white}>{props.stats.future_runs}</td>
+                                </tr>
+                                <tr>
+                                    <td className={classes.grey} >Created Future Runs</td>
+                                    <td className={classes.grey}>{props.stats.future_planned_runs}</td>
+                                </tr>
+                                <tr>
+                                    <td className={classes.white}>Joined Future Runs</td>
+                                    <td className={classes.white}>{props.stats.future_joined_runs}</td>
+                                </tr>
+                                <tr>
+                                    <td className={classes.grey}>Total Created Runs</td>
+                                    <td className={classes.grey}>{props.stats.created_runs}</td>
+                                </tr>
+                                <tr>
+                                    <td className={classes.white}>Runs Completed</td>
+                                    <td className={classes.white}>{props.stats.past_runs}</td>
+                                </tr>
+
+                                <tr>
+                                    <td className={classes.grey}>Friends</td>
+                                    <td className={classes.grey}>{props.stats.friends}</td>
+                                </tr>
+
+                        </tbody>
+
+                    </table>
+
+                    <ProfileClubs /> 
                 </Paper>
             </div>
         </div>
@@ -216,8 +277,9 @@ const mapStateToProps = state => {
         runs: state.runs.userRuns,
         runsLoading: state.runs.loadingUserRuns,
         userHistory: state.runs.userHistory,
-        historyLoading: state.runs.updatingHistory
+        historyLoading: state.runs.updatingHistory,
+        stats: state.user.userStats
     }
 }
 
-export default connect(mapStateToProps, {fetchUser, fetchUserRuns, fetchUserHistory})(ProfileContainer)
+export default connect(mapStateToProps, {fetchUser, fetchUserRuns, fetchUserHistory, fetchUserStats})(ProfileContainer)

@@ -1,4 +1,15 @@
-function runReducer(state = { runs: [], loading: false, creating: false, updating: false, runCreator: "", errorMessage: "", userRuns: [], loadingUserRuns: false, userHistory: [], updatingHistory: false }, action){
+function runReducer(state = { runs: [], 
+    loading: false, 
+    offset: 0, 
+    creating: false, 
+    updating: false, 
+    runCreator: "", 
+    errorMessage: "", 
+    userRuns: [], 
+    loadingUserRuns: false, 
+    userHistory: [], 
+    updatingHistory: false 
+}, action){
     switch(action.type){
         case 'LOADING_RUNS':
             return {
@@ -9,7 +20,8 @@ function runReducer(state = { runs: [], loading: false, creating: false, updatin
         case "ADD_RUNS":
             return {
                 ...state, 
-                runs: action.runs,
+                runs: [...state.runs, ...action.runs],
+                offset: state.offset + 3,
                 loading: false,
             }
         case "CREATING_RUN":
@@ -84,6 +96,19 @@ function runReducer(state = { runs: [], loading: false, creating: false, updatin
                 ...state,
                 userHistory: action.runs,
                 updatingHistory: false,
+            }
+        case 'RESET_TO_DEFAULT':
+            return {...state, runs: [], 
+                loading: false, 
+                offset: 0, 
+                creating: false, 
+                updating: false, 
+                runCreator: "", 
+                errorMessage: "", 
+                userRuns: [], 
+                loadingUserRuns: false, 
+                userHistory: [], 
+                updatingHistory: false 
             }
         default:
             return state;

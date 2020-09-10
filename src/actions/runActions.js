@@ -1,6 +1,6 @@
 const RUNURL = 'http://localhost:3000/'
 
-export const fetchRuns = (user) => {
+export const fetchRuns = (user, offset) => {
     return (dispatch) => {
         dispatch({ type: 'LOADING_RUNS'})
         let config = {
@@ -9,7 +9,7 @@ export const fetchRuns = (user) => {
                 "Authorization": `bearer ${localStorage.token}`
             }
         }
-        fetch(`${RUNURL}runs/friends/${user}`, config).then(response => {
+        fetch(`${RUNURL}runs/friends/${user}/${offset}`, config).then(response => {
             return response.json()
         }).then(responseJSON => {
             dispatch({ type: 'ADD_RUNS', runs: responseJSON})

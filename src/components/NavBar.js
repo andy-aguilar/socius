@@ -11,11 +11,12 @@ import Button from '@material-ui/core/Button';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import { connect } from 'react-redux';
 import {showCreateRunModal, showEditUserModal} from '../actions/modalActions';
-import {toggleLogin} from '../actions/loginActions';
+import { toggleLogin, logoutUser } from '../actions/loginActions';
 import logoGrey from '../images/logoGrey.png'
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Notifications from './notifications';
 import Badge from '@material-ui/core/Badge';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -69,6 +70,7 @@ function MenuAppBar(props) {
 
   const handleLogout = () => {
     handleClose()
+    props.logoutUser()
     localStorage.clear()
     props.history.push("/")
   }
@@ -197,4 +199,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { toggleLogin, showCreateRunModal, showEditUserModal})(MenuAppBar)
+export default connect(mapStateToProps, { toggleLogin, showCreateRunModal, showEditUserModal, logoutUser })(MenuAppBar)

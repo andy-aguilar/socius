@@ -47,6 +47,17 @@ function modalReducer(state = {createRun: false,
                 return {...state, filter: true}
             case 'HIDE_FILTER':
                 return {...state, filter: false}
+            case "RESET_TO_DEFAULT":
+                return {...state, createRun: false, 
+                    createSnackBar: false, 
+                    updateSuccess: false, 
+                    updateError: false, 
+                    editUser: false, 
+                    editUserSuccess: false, 
+                    editUserError: false, 
+                    notifications: false, 
+                    filter: false
+                }
             default:
                 return state
         }

@@ -20,8 +20,18 @@ function friendsReducer(state = {friends: [], sent: [], received: [], requests: 
             return {...state,
             requestLoading: false,
             requests: action.requests}
+        case "RESET_TO_DEFAULT":
+            return {...state,
+                friends: [],
+                sent: [],
+                received: [],
+                requests: [],
+                loading: false,
+                requestLoading: false,
+            }
         default:
             return state
+
     }
 }
 

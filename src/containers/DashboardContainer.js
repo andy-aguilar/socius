@@ -57,10 +57,6 @@ const DashboardContainer = (props) => {
 
     const { fetchRuns } = props
 
-    useEffect(() => {
-        fetchRuns(localStorage.currentUser)
-    }, [fetchRuns, props.force])
-
     const pushProfile = (user) => {
         props.history.push(`/profile/${user}`)
     }

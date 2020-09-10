@@ -36,3 +36,20 @@ export const updateUser = (editedUser, id) => {
         })
     }
 }
+
+export const fetchUserStats = (id) => {
+    return (dispatch) => {
+        dispatch({type: 'LOADING_USER_STATS'})
+        let config = {
+            method: 'GET',
+            headers: {
+                "Authorization": `bearer ${localStorage.token}`
+            }
+        }
+        fetch(`http://localhost:3000/runs/userstats/${id}`, config).then(resp => {
+            return resp.json()
+        }).then(stats => {
+            dispatch({type: 'ADD_USER_STATS', stats: stats})
+        })
+    }
+}
