@@ -13,6 +13,7 @@ import Calendar from './calendarContainer';
 import {fetchUserStats} from '../actions/userActions';
 import { TextareaAutosize } from '@material-ui/core';
 import ProfileClubs from './profileClubs';
+import track2 from '../images/track2.jpg';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
         flexShrink: 1,
     },
     header: {
-        backgroundImage: `url(${trackimage})`,
+        backgroundImage: `url(${track2})`,
+        backgroundSize: 'cover',
         height: 200,
         margin: 10,
         marginLeft: 100,
@@ -278,7 +280,8 @@ const mapStateToProps = state => {
         runsLoading: state.runs.loadingUserRuns,
         userHistory: state.runs.userHistory,
         historyLoading: state.runs.updatingHistory,
-        stats: state.user.userStats
+        stats: state.user.userStats,
+        offset: state.runs.profileOffset,
     }
 }
 

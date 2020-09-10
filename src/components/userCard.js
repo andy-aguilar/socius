@@ -16,6 +16,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { showEditUserModal } from '../actions/modalActions';
+import track2 from '../images/track2.jpg'
 
 
 const useStyles = makeStyles({
@@ -85,7 +86,7 @@ const UserCard = (props) => {
                     >
                         <CardMedia
                         className={classes.media}
-                        image={trackimage}
+                        image={track2}
                         title="track"
                         >
                         {renderAvatar()}

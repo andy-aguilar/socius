@@ -8,7 +8,8 @@ function runReducer(state = { runs: [],
     userRuns: [], 
     loadingUserRuns: false, 
     userHistory: [], 
-    updatingHistory: false 
+    updatingHistory: false,
+    profileOffset: 0,
 }, action){
     switch(action.type){
         case 'LOADING_RUNS':
@@ -33,6 +34,7 @@ function runReducer(state = { runs: [],
         case "CREATE_RUN":
             return{...state,
                 runs: [...state.runs, action.run],
+                userRuns: [...state.userRuns, action.run],
                 creating: false
             }
         case "JOINING_RUN":
