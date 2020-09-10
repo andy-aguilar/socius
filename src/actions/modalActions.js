@@ -73,6 +73,17 @@ export const hideFilter = () => {
     }
 }
 
+export const showEditRun = (id) => {
+    return (dispatch) => {
+        dispatch({type: 'SHOW_EDIT_RUN', id: id})
+    }
+}
+
+export const hideEditRun = () => {
+    return (dispatch) => {
+        dispatch({ type: 'HIDE_EDIT_RUN'})
+    }
+}
 
 
 

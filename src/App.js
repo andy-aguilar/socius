@@ -13,6 +13,7 @@ import EditUserModal from './components/editUserModal';
 import FilterModal from './components/filterModal'
 import ProfileContainer from './containers/profileContainer';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import EditRunModal from './components/editRunModal'
 
 const theme = createMuiTheme({
   palette: {
@@ -44,6 +45,7 @@ function App(props) {
     <ThemeProvider theme={theme}>
     <div className="App" style={{ height: '100%', display: 'flex', flexFlow: 'column'}}>
       <EditUserModal/>
+      <EditRunModal />
       <CreateRunModal/>
       <FilterModal />
       <Snackbar open={props.createSuccess} autoHideDuration={3000} onClose={handleClose}>

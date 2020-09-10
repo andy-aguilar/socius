@@ -6,6 +6,7 @@ function modalReducer(state = {createRun: false,
     editUserSuccess: false, 
     editUserError: false, 
     notifications: false, 
+    editRun: false,
     filter: false
     }, action){
         switch(action.type){
@@ -47,6 +48,10 @@ function modalReducer(state = {createRun: false,
                 return {...state, filter: true}
             case 'HIDE_FILTER':
                 return {...state, filter: false}
+            case 'SHOW_EDIT_RUN':
+                return {...state, editRun: true}
+            case 'HIDE_EDIT_RUN':
+                return {...state, editRun: false}
             case "RESET_TO_DEFAULT":
                 return {...state, createRun: false, 
                     createSnackBar: false, 

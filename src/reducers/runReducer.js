@@ -10,6 +10,7 @@ function runReducer(state = { runs: [],
     userHistory: [], 
     updatingHistory: false,
     profileOffset: 0,
+    editingRun: false,
 }, action){
     switch(action.type){
         case 'LOADING_RUNS':
@@ -65,6 +66,15 @@ function runReducer(state = { runs: [],
                     runCreator: action.run.users.find(user => user.id === action.run.user_owner_id).first_name
                 }
             }
+        case "UPDATE_USER_RUN":
+            const runIndex = state.userRuns.findIndex(run => run.id === action.run.id)
+                const newRuns = [...state.userRuns]
+                newRuns[runIndex] = action.run
+                return {...state,
+                    userRuns: newRuns,
+                    updating: false,
+                    runCreator: action.run.users.find(user => user.id === action.run.user_owner_id).first_name
+                }
         case "LOADING_USER_RUNS":
             return {
                 ...state,
@@ -106,6 +116,10 @@ function runReducer(state = { runs: [],
                 userHistory: action.runs,
                 updatingHistory: false,
             }
+        case 'SHOW_EDIT_RUN':
+            return {...state, editingRun: action.id}
+        case 'HIDE_EDIT_RUN':
+            return {...state, editingRun: false}
         case 'RESET_TO_DEFAULT':
             return {...state, runs: [], 
                 loading: false, 

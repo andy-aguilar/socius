@@ -14,6 +14,7 @@ import {fetchUserStats} from '../actions/userActions';
 import { TextareaAutosize } from '@material-ui/core';
 import ProfileClubs from './profileClubs';
 import track2 from '../images/track2.jpg';
+import ProfileHistoryContainer from './profileHistoryContainer'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -155,10 +156,10 @@ const ProfileContainer = (props) => {
 
     const renderPage = () => {
         if(runsClicked){
-            return <ProfileRunsContainer runs={props.runs} loading={props.runsLoading} />
+            return <ProfileRunsContainer />
         }
         else if (historyClicked){
-            return <ProfileRunsContainer runs={props.userHistory} loading={props.historyLoading} />
+            return <ProfileHistoryContainer />
         }
         else if (calendarClicked){
             return <Calendar />

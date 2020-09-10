@@ -126,3 +126,9 @@ export const fetchFilteredRuns = (user, filters) => {
         })
     }
 }
+
+export const editRun = (run) => {
+    return(dispatch) => {
+        dispatch({ type: "UPDATE_USER_RUN", run: run})
+    }
+}

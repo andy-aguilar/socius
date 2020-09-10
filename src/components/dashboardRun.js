@@ -13,6 +13,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ChatIcon from '@material-ui/icons/Chat';
 import { connect } from 'react-redux';
 import { joinRun, leaveRun } from '../actions/runActions';
+import { showEditRun } from '../actions/modalActions'
 import mapboxgl from 'mapbox-gl';
 import Tooltip from '@material-ui/core/Tooltip';
 import Moment from 'react-moment';
@@ -88,7 +89,7 @@ function DashboardRun(props) {
         .addTo(map);
         map.scrollZoom.disable();
         map.addControl(new mapboxgl.NavigationControl());
-    }, [])
+    }, [run])
 
     
 
@@ -108,7 +109,7 @@ function DashboardRun(props) {
     }
 
     const editRun = () => {
-        console.log("editing")
+        props.showEditRun(run.id)
     }
 
     const renderFriends = () => {
@@ -247,4 +248,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { joinRun, leaveRun })(DashboardRun)
+export default connect(mapStateToProps, { joinRun, leaveRun, showEditRun })(DashboardRun)

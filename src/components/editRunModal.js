@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { connect } from 'react-redux';
-import {hideCreateRunModal} from '../actions/modalActions';
+import {hideEditRun} from '../actions/modalActions';
+import {editRun} from '../actions/runActions'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import {createRun} from '../actions/runActions';
 import CloseIcon from '@material-ui/icons/Close';
 import mapboxgl from 'mapbox-gl';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWFndWlsYXIzMTgiLCJhIjoiY2tlazNrOTlkMDMwcjJzb3Yyd20zYm9naSJ9.Ik_aGfxRFIrtj1Azc9jGXw';
 
@@ -76,10 +77,15 @@ const useStyles = makeStyles((theme) => ({
         height: 300,
         marginTop: 20,
         marginLeft: 10,
+    },
+    progress:{
+        position: 'absolute',
+        top: 325,
+        right: '48%',
     }
 }));
 
-function CreateRunModal(props) {
+function EditRunModal(props) {
     const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = useState(getModalStyle);
@@ -89,12 +95,12 @@ function CreateRunModal(props) {
     const [longitude, setLongitude] = useState(-77.03680636144968);
     const [latitude, setLatitude] = useState(38.89618501163949);
     const [zoom, setZoom] = useState(12.02);
+    const [editing, setEditing] = useState(true)
 
     let mapContainer
 
     const handleClose = () => {
-        console.log('closing')
-        props.hideCreateRunModal()
+        props.hideEditRun()
         setName("")
         setTime("2020-08-22T06:00")
         setDistance(0)
@@ -102,25 +108,58 @@ function CreateRunModal(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const run={
+        let run={
             run: {
                 name,
                 date: time,
                 distance, 
-                user_owner_id: parseInt(localStorage.currentUser, 10),
                 latitude,
                 longitude,
                 zoom,
             },
 
         }
-        props.createRun(run)
-        e.target.reset()
-        props.hideCreateRunModal()
+        let config = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `bearer ${localStorage.token}`
+            },
+            body: JSON.stringify(run)
+        }
+        fetch(`http://localhost:3000/runs/${props.run}`, config).then(resp => {
+            return resp.json()
+        }).then(run => {
+            props.editRun(run)
+            handleClose()
+        })
+        
     }
 
     useEffect(() => {
-        if(props.open){
+        if(props.run){
+            let config = {
+                method: 'GET',
+                headers: {
+                    "Authorization": `bearer ${localStorage.token}`
+                }
+            }
+            fetch(`http://localhost:3000/runs/${props.run}`, config).then(resp => {
+                return resp.json()
+            }).then(run => {
+                setName(run.name);
+                setTime(run.date.split(".")[0]);
+                setDistance(run.distance);
+                setLongitude(run.longitude);
+                setLatitude(run.latitude);
+                setZoom(run.zoom);
+                setEditing(false)
+            })
+        }
+    }, [props.run])
+
+    useEffect(() => {
+        if(props.open && !editing){
             setTimeout(()=> {
                 const map = new mapboxgl.Map({
                     container: mapContainer,
@@ -139,44 +178,45 @@ function CreateRunModal(props) {
                     trackUserLocation: true
                     })
                     );
+                    const marker = new mapboxgl.Marker({
+                        draggable: true,
+                        id: 'test-marker'
+                    })
+                        .setLngLat([longitude, latitude])
+                        .addTo(map);
+                    function onDragEnd() {
+                        var lngLat = marker.getLngLat();
+                        setLatitude(lngLat.lat)
+                        setLongitude(lngLat.lng)
+                        }
+                    marker.on('dragend', onDragEnd);
+                    
                 
-                map.on('click', (e) => {
-                    const modal = document.getElementsByClassName("makeStyles-modalPaper-9")[0];
-                    const circle = modal.getElementsByClassName('mapboxgl-user-location-accuracy-circle')
-                    const testMarker = modal.getElementsByClassName("mapboxgl-marker")
-                    console.log(circle, testMarker)
-                    if(testMarker.length === 0 || (circle.length !== 0 && testMarker.length === circle.length + 1)){
-                        setLatitude(e.lngLat.lat)
-                        setLongitude(e.lngLat.lng)
-                        let coords = `lat: ${e.lngLat.lat} <br> lng: ${e.lngLat.lng}`;
-                        let popup = new mapboxgl.Popup().setText(coords);
-                        let el = document.createElement('div');
-                        el.id = 'set-marker';
-                        el.className = 'TEST'
-                        const marker = new mapboxgl.Marker({
-                            draggable: true,
-                            id: 'test-marker'
-                        })
-                            .setLngLat(e.lngLat)
-                            .setPopup(popup)
-                            .addTo(map);
-                        function onDragEnd() {
-                            var lngLat = marker.getLngLat();
-                            setLatitude(lngLat.lat)
-                            setLongitude(lngLat.lng)
-                            }
-                        marker.on('dragend', onDragEnd);
-                    }
+                // map.on('click', (e) => {
+                //     const modal = document.getElementsByClassName("makeStyles-modalPaper-9")[0];
+                //     const circle = modal.getElementsByClassName('mapboxgl-user-location-accuracy-circle')
+                //     const testMarker = modal.getElementsByClassName("mapboxgl-marker")
+                //     console.log(circle, testMarker)
+                //     if(testMarker.length === 0 || (circle.length !== 0 && testMarker.length === circle.length + 1)){
+                //         setLatitude(e.lngLat.lat)
+                //         setLongitude(e.lngLat.lng)
+                //         let coords = `lat: ${e.lngLat.lat} <br> lng: ${e.lngLat.lng}`;
+                //         let popup = new mapboxgl.Popup().setText(coords);
+                //         let el = document.createElement('div');
+                //         el.id = 'set-marker';
+                //         el.className = 'TEST'
+                        
+                //     }
                 
                 
-                    // // create DOM element for the marker
+                //     // // create DOM element for the marker
                 
-                    // // create the marker
+                //     // // create the marker
 
-                });
+                // });
             }, 50)
         }
-    }, [props.open])
+    }, [props.open, editing])
         
 
 
@@ -190,8 +230,12 @@ function CreateRunModal(props) {
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
         >
+            
             <div style={modalStyle} className={classes.modalPaper}>
-                <h1 id="simple-modal-title" className={classes.heading}>Create Run</h1>
+            { editing ? 
+                <CircularProgress className={classes.progress}/> : 
+                <div>
+                <h1 id="simple-modal-title" className={classes.heading}>Edit Run</h1>
                 <CloseIcon className={classes.x} style={{cursor: 'pointer'}} onClick={handleClose}/>
                 <form onSubmit={(e) => handleSubmit(e)} noValidate>
                     <TextField id="filled-search"
@@ -233,9 +277,11 @@ function CreateRunModal(props) {
                         ref={el => mapContainer = el}
                     ></div>
                     <Button type="submit" size="large" variant="contained" className={classes.button}>
-                    Create Run
+                    Update Run
                     </Button>
                 </form>
+                </div>
+                }
             </div>
         </Modal>
     );
@@ -243,8 +289,9 @@ function CreateRunModal(props) {
 
 const mapStateToProps = state => {
     return{
-        open: state.modals.createRun
+        open: state.modals.editRun,
+        run: state.runs.editingRun
     }
 }
 
-export default connect(mapStateToProps, { hideCreateRunModal, createRun })(CreateRunModal)
+export default connect(mapStateToProps, { hideEditRun, editRun })(EditRunModal)
