@@ -25,6 +25,13 @@ function runReducer(state = { runs: [],
                 offset: state.offset + 3,
                 loading: false,
             }
+        case "REPLACE_RUNS":
+            return {
+                ...state,
+                runs: action.runs,
+                offset: 0,
+                loading: false,
+            }
         case "CREATING_RUN":
             return{
                 ...state,

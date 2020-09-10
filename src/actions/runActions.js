@@ -122,7 +122,7 @@ export const fetchFilteredRuns = (user, filters) => {
         fetch(`${RUNURL}runs/filter/${user}`, config).then(response => {
             return response.json()
         }).then(responseJSON => {
-            dispatch({ type: 'ADD_RUNS', runs: responseJSON})
+            dispatch({ type: 'REPLACE_RUNS', runs: responseJSON})
         })
     }
 }
