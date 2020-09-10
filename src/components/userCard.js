@@ -61,7 +61,6 @@ const UserCard = (props) => {
 
 
     const renderAvatar = () => {
-        console.log(props.user)
         return props.user.user.image ? 
             <Avatar
                 alt={props.user.user.first_name}

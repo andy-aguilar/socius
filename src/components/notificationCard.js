@@ -87,7 +87,6 @@ const NotificationCard = (props) => {
         fetch(`http://localhost:3000/friendships/${props.request}`, config).then(resp => {
             return resp.json()
         }).then(data => {
-            console.log(data)
             props.addRequests(localStorage.currentUser)
         })
     }

@@ -61,7 +61,6 @@ const LoginForm = (props) => {
                 console.error('Error:', data.message)
             }
             else {
-                console.log(data.user)
                 props.loginUser(data.user)
                 localStorage.token = data.jwt
                 localStorage.currentUser = data.user.id
