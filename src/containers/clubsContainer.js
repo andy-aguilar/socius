@@ -76,6 +76,8 @@ const ClubsContainer = () => {
                 <SearchIcon />
             </IconButton>
             <div className={classes.clubs}>
+            { localStorage.currentUser === "78" ?
+                <div>
             <Paper className={classes.club} elevation={0} >
                 <Avatar className={classes.avatar} src={pacers} ></Avatar>
                 <Typography component="p" className={classes.clubText} gutterBottom>
@@ -124,6 +126,8 @@ const ClubsContainer = () => {
                     District Running Collective
                 </Typography>
             </Paper>
+            </div> :
+            null }
             </div>
         </CardContent>
         </Card>

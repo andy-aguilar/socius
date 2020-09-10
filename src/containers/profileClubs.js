@@ -77,10 +77,9 @@ const ProfileClubs = () => {
             <Typography variant="h4" component="h2" className={classes.title} gutterBottom>
                 Clubs
             </Typography>
-            <IconButton className={classes.searchIcon} aria-label="joinRun">
-                <SearchIcon />
-            </IconButton>
             <div className={classes.clubs}>
+            { localStorage.currentUser === "78" ?
+                <div>
             <Paper className={classes.club} elevation={0} >
                 <Avatar className={classes.avatar} src={pacers} ></Avatar>
                 <Typography component="p" className={classes.clubText} gutterBottom>
@@ -129,6 +128,8 @@ const ProfileClubs = () => {
                     District Running Collective
                 </Typography>
             </Paper>
+            </div> :
+            null }
             </div>
         </CardContent>
         </Card>

@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import trackimage from '../images/trackimage.jpg';
 import Avatar from '@material-ui/core/Avatar';
 import {connect} from 'react-redux';
-import { fetchUser } from '../actions/userActions';
+import { fetchUser, fetchUserStats } from '../actions/userActions';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -55,6 +55,7 @@ const UserCard = (props) => {
 
     useEffect(() => {
         props.fetchUser(localStorage.currentUser)
+        props.fetchUserStats(localStorage.currentUser)
     }, [])
 
 
@@ -101,7 +102,7 @@ const UserCard = (props) => {
                                 </tr>
                                 <tr>
                                     <td>{props.friends.length}</td>
-                                    <td>0</td>
+                                    <td>{props.stats.all_runs}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -149,8 +150,9 @@ const UserCard = (props) => {
 const mapStateToProps = state => {
     return {
         user: state.user,
-        friends: state.friends.friends
+        friends: state.friends.friends,
+        stats: state.user.userStats,
     }
 }
 
-export default connect(mapStateToProps, { fetchUser, showEditUserModal })(UserCard)
+export default connect(mapStateToProps, { fetchUser, showEditUserModal, fetchUserStats })(UserCard)
